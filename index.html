@@ -1,0 +1,2478 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>천서고등학교</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --primary: #1a3a6b;
+  --primary-dark: #0f2548;
+  --primary-light: #2d5ba0;
+  --accent: #d4a843;
+  --accent-light: #f0d78c;
+  --bg: #f5f5f5;
+  --white: #ffffff;
+  --text: #333333;
+  --text-light: #666666;
+  --border: #e0e0e0;
+  --hover-bg: #f0f4fa;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a { text-decoration: none; color: inherit; cursor: pointer; }
+
+/* ===== TOP BAR ===== */
+.top-bar {
+  background: var(--primary-dark);
+  color: rgba(255,255,255,0.7);
+  font-size: 12px;
+  padding: 6px 0;
+}
+.top-bar .container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+.top-bar a {
+  color: rgba(255,255,255,0.7);
+  transition: color 0.2s;
+}
+.top-bar a:hover { color: #fff; }
+.top-bar .divider { color: rgba(255,255,255,0.3); }
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: var(--white);
+  padding: 16px 0;
+  border-bottom: 3px solid var(--primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+.school-logo {
+  width: 56px;
+  height: 56px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-weight: 900;
+  font-size: 22px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.school-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.school-logo .placeholder-text {
+  position: absolute;
+  color: var(--accent);
+  font-weight: 900;
+  font-size: 22px;
+}
+.school-name-area h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -0.5px;
+}
+.school-name-area p {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: -2px;
+  letter-spacing: 1px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 14px;
+  transition: border-color 0.2s;
+}
+.search-box:focus-within { border-color: var(--primary-light); }
+.search-box input {
+  border: none;
+  outline: none;
+  font-size: 13px;
+  font-family: inherit;
+  width: 180px;
+  color: var(--text);
+}
+.search-box input::placeholder { color: #bbb; }
+.search-box button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--primary);
+  padding: 2px;
+}
+
+.header-icons {
+  display: flex;
+  gap: 6px;
+}
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  transition: all 0.2s;
+  color: var(--text-light);
+}
+.icon-btn:hover {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+/* ===== NAVIGATION ===== */
+.nav {
+  background: var(--primary);
+  position: sticky;
+  top: 91px;
+  z-index: 99;
+}
+.nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+.nav-item {
+  position: relative;
+}
+.nav-item > a {
+  display: block;
+  padding: 14px 28px;
+  color: rgba(255,255,255,0.9);
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s;
+  letter-spacing: -0.2px;
+}
+.nav-item > a:hover,
+.nav-item.active > a {
+  background: var(--primary-light);
+  color: #fff;
+}
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--white);
+  min-width: 200px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  border-top: 2px solid var(--accent);
+  z-index: 100;
+}
+.nav-item:hover .nav-dropdown { display: block; }
+.nav-dropdown a {
+  display: block;
+  padding: 10px 18px;
+  font-size: 13.5px;
+  color: var(--text);
+  border-bottom: 1px solid #f0f0f0;
+  transition: all 0.15s;
+}
+.nav-dropdown a:hover {
+  background: var(--hover-bg);
+  color: var(--primary);
+  padding-left: 22px;
+}
+
+/* ===== BANNER ===== */
+.banner {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+}
+.banner-slides {
+  display: flex;
+  width: 300%;
+  height: 100%;
+  transition: transform 0.6s ease;
+}
+.banner-slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.banner-slide:nth-child(1) {
+  background: linear-gradient(135deg, #0f2548 0%, #1a3a6b 40%, #2d5ba0 100%);
+}
+.banner-slide:nth-child(2) {
+  background: linear-gradient(135deg, #1a4a3a 0%, #2d7a5a 40%, #3a9a70 100%);
+}
+.banner-slide:nth-child(3) {
+  background: linear-gradient(135deg, #3a1a4a 0%, #5a2d7a 40%, #7a3a9a 100%);
+}
+.banner-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  background-image: 
+    radial-gradient(circle at 20% 50%, white 1px, transparent 1px),
+    radial-gradient(circle at 80% 20%, white 1px, transparent 1px),
+    radial-gradient(circle at 60% 80%, white 1px, transparent 1px);
+  background-size: 60px 60px, 80px 80px, 40px 40px;
+}
+.banner-content {
+  text-align: center;
+  color: white;
+  z-index: 2;
+  padding: 0 40px;
+}
+.banner-content h2 {
+  font-size: 38px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  letter-spacing: -0.5px;
+}
+.banner-content p {
+  font-size: 16px;
+  opacity: 0.85;
+  font-weight: 300;
+}
+.banner-nav {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 3;
+}
+.banner-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+}
+.banner-dot.active {
+  background: var(--accent);
+  transform: scale(1.2);
+}
+.banner-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 3;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.banner-arrow:hover { background: rgba(255,255,255,0.3); }
+.banner-arrow.left { left: 20px; }
+.banner-arrow.right { right: 20px; }
+
+/* ===== QUICK LINKS ===== */
+.quick-links {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+}
+.quick-links-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+.quick-link {
+  text-align: center;
+  padding: 24px 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-right: 1px solid #f0f0f0;
+  position: relative;
+}
+.quick-link:last-child { border-right: none; }
+.quick-link:hover {
+  background: var(--hover-bg);
+  transform: translateY(-2px);
+}
+.quick-link-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 10px;
+  background: var(--primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: white;
+  transition: all 0.2s;
+}
+.quick-link:hover .quick-link-icon {
+  background: var(--accent);
+  transform: scale(1.05);
+}
+.quick-link span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+  padding: 40px 0;
+}
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+/* Section Cards */
+.section-card {
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  overflow: hidden;
+  border: 1px solid #eee;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 2px solid var(--primary);
+}
+.section-header h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-header .more-btn {
+  font-size: 12px;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.section-header .more-btn:hover { color: var(--primary); }
+
+/* Notice Board */
+.notice-list { padding: 0; }
+.notice-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid #f5f5f5;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.notice-item:hover { background: var(--hover-bg); }
+.notice-item:last-child { border-bottom: none; }
+.notice-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-weight: 600;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+.badge-notice { background: #e8f0fe; color: var(--primary); }
+.badge-important { background: #fce8e8; color: #c23a3a; }
+.badge-event { background: #e8f8e8; color: #2a7a2a; }
+.notice-title {
+  flex: 1;
+  font-size: 13.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 10px;
+}
+.notice-date {
+  font-size: 12px;
+  color: #aaa;
+  flex-shrink: 0;
+}
+.notice-new {
+  width: 6px;
+  height: 6px;
+  background: #e74c3c;
+  border-radius: 50%;
+  margin-left: 6px;
+  flex-shrink: 0;
+}
+
+/* Tabs */
+.tab-bar {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+}
+.tab-btn {
+  padding: 12px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-light);
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  font-family: inherit;
+  transition: color 0.2s;
+}
+.tab-btn.active {
+  color: var(--primary);
+  font-weight: 600;
+}
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary);
+}
+.tab-btn:hover { color: var(--primary); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Calendar */
+.calendar-widget { padding: 16px 20px; }
+.cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.cal-header h4 { font-size: 15px; font-weight: 600; }
+.cal-nav {
+  display: flex;
+  gap: 4px;
+}
+.cal-nav button {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.cal-nav button:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  text-align: center;
+}
+.cal-day-name {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 0;
+  color: var(--text-light);
+}
+.cal-day-name:first-child { color: #e74c3c; }
+.cal-day-name:last-child { color: #3498db; }
+.cal-day {
+  font-size: 12.5px;
+  padding: 7px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+.cal-day:hover { background: var(--hover-bg); }
+.cal-day.today {
+  background: var(--primary);
+  color: white;
+  font-weight: 700;
+}
+.cal-day.has-event::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.cal-day.other-month { color: #ccc; }
+.cal-day.sunday { color: #e74c3c; }
+.cal-day.saturday { color: #3498db; }
+.cal-day.today.sunday, .cal-day.today.saturday { color: white; }
+
+.cal-events { margin-top: 14px; border-top: 1px solid #f0f0f0; padding-top: 12px; }
+.cal-event-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+.cal-event-item:hover .cal-event-text { color: var(--primary); }
+.cal-event-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.cal-event-date { color: var(--text-light); font-size: 11.5px; flex-shrink: 0; min-width: 40px; }
+.cal-event-text { transition: color 0.15s; }
+
+/* ===== STUDENT LOOKUP ===== */
+.student-section {
+  margin-top: 28px;
+}
+.student-card {
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  border: 1px solid #eee;
+  overflow: hidden;
+}
+.student-header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  padding: 20px 24px;
+  color: white;
+}
+.student-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.student-header p {
+  font-size: 13px;
+  opacity: 0.8;
+}
+.student-body { padding: 24px; }
+.student-search-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.student-input-group {
+  flex: 1;
+  position: relative;
+}
+.student-input-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+.student-input-group select,
+.student-input-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  font-size: 13.5px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  background: var(--white);
+  color: var(--text);
+}
+.student-input-group select:focus,
+.student-input-group input:focus {
+  border-color: var(--primary-light);
+}
+.student-search-btn {
+  align-self: flex-end;
+  padding: 10px 28px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.student-search-btn:hover { background: var(--primary-light); }
+
+.student-result {
+  display: none;
+  margin-top: 20px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.student-result.show { display: block; }
+.student-result-header {
+  background: #f8fafc;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.student-table th {
+  background: #fafafa;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-light);
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+.student-table td {
+  padding: 12px 14px;
+  font-size: 13.5px;
+  border-bottom: 1px solid #f5f5f5;
+}
+.student-table tr:last-child td { border-bottom: none; }
+.student-table tr:hover td { background: var(--hover-bg); }
+.status-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+.status-enrolled { background: #e8f8e8; color: #2a7a2a; }
+.status-graduated { background: #f0f0f0; color: #888; }
+.student-photo-cell {
+  width: 40px;
+  height: 40px;
+  background: #f0f0f0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #ccc;
+}
+.student-no-result {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-light);
+  font-size: 14px;
+}
+.student-no-result span { font-size: 32px; display: block; margin-bottom: 10px; }
+
+/* ===== GALLERY SECTION ===== */
+.gallery-section {
+  margin-top: 28px;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  padding: 4px;
+}
+.gallery-item {
+  position: relative;
+  aspect-ratio: 4/3;
+  background: #e8e8e8;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gallery-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #bbb;
+  font-size: 12px;
+  gap: 4px;
+}
+.gallery-placeholder span { font-size: 28px; }
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+
+/* ===== BOTTOM INFO BAR ===== */
+.info-bar {
+  background: var(--primary-dark);
+  padding: 28px 0;
+  margin-top: 40px;
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.info-stat {
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.info-stat:hover { background: rgba(255,255,255,0.08); }
+.info-stat .number {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--accent);
+}
+.info-stat .label {
+  font-size: 13px;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: #1a1a2e;
+  color: rgba(255,255,255,0.5);
+  padding: 36px 0 24px;
+  font-size: 12.5px;
+}
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 18px;
+}
+.footer-info p {
+  margin-bottom: 4px;
+  line-height: 1.8;
+}
+.footer-info strong {
+  color: rgba(255,255,255,0.8);
+  font-weight: 600;
+}
+.footer-links {
+  display: flex;
+  gap: 16px;
+}
+.footer-link {
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: color 0.2s;
+  font-size: 12.5px;
+}
+.footer-link:hover { color: rgba(255,255,255,0.9); }
+.footer-link.important { color: var(--accent); font-weight: 600; }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-copyright { font-size: 11.5px; }
+.footer-badges {
+  display: flex;
+  gap: 8px;
+}
+.footer-badge {
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  font-size: 10.5px;
+  color: rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.footer-badge:hover {
+  border-color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.7);
+}
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.modal-overlay.show { display: flex; }
+.modal {
+  background: var(--white);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+.modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: var(--white);
+  border-radius: 12px 12px 0 0;
+}
+.modal-header h3 { font-size: 17px; font-weight: 700; color: var(--primary); }
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: #f0f0f0;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.modal-close:hover { background: #e0e0e0; }
+.modal-body { padding: 24px; }
+.modal-body .notice-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 12.5px;
+  color: var(--text-light);
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 16px;
+}
+.modal-body .notice-content {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.modal-body .notice-content p { margin-bottom: 12px; }
+
+/* ===== POPUP / LAYER ===== */
+.popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 500;
+  justify-content: center;
+  align-items: center;
+}
+.popup-overlay.show { display: flex; }
+.popup {
+  background: white;
+  border-radius: 8px;
+  width: 380px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  overflow: hidden;
+}
+.popup-header {
+  background: var(--primary);
+  color: white;
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.popup-header h4 { font-size: 14px; font-weight: 600; }
+.popup-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 18px;
+  cursor: pointer;
+}
+.popup-close:hover { color: white; }
+.popup-body {
+  padding: 20px 18px;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--text);
+}
+.popup-body a {
+  color: var(--primary-light);
+  text-decoration: underline;
+}
+.popup-footer {
+  padding: 0 18px 16px;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.popup-btn {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  font-weight: 500;
+}
+.popup-btn-primary { background: var(--primary); color: white; }
+.popup-btn-primary:hover { background: var(--primary-light); }
+.popup-btn-secondary { background: #eee; color: var(--text); }
+.popup-btn-secondary:hover { background: #ddd; }
+
+/* ===== LOGIN MODAL ===== */
+.login-body { text-align: center; }
+.login-body .login-icon {
+  width: 64px;
+  height: 64px;
+  background: var(--hover-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin: 0 auto 16px;
+}
+.login-form { text-align: left; margin-top: 20px; }
+.login-form label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+.login-form input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  margin-bottom: 14px;
+  transition: border-color 0.2s;
+}
+.login-form input:focus { border-color: var(--primary-light); }
+.login-submit {
+  width: 100%;
+  padding: 12px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+  margin-top: 4px;
+}
+.login-submit:hover { background: var(--primary-light); }
+.login-options {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 14px;
+  font-size: 12.5px;
+}
+.login-options a {
+  color: var(--text-light);
+  cursor: pointer;
+}
+.login-options a:hover { color: var(--primary); text-decoration: underline; }
+
+/* ===== SITEMAP ===== */
+.sitemap-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 200;
+}
+.sitemap-overlay.show { display: block; }
+.sitemap-panel {
+  position: fixed;
+  top: 0;
+  right: -500px;
+  width: 460px;
+  height: 100%;
+  background: white;
+  z-index: 201;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+}
+.sitemap-panel.show { right: 0; }
+.sitemap-header {
+  padding: 20px 24px;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sitemap-header h3 { font-size: 16px; font-weight: 700; }
+.sitemap-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 22px;
+  cursor: pointer;
+}
+.sitemap-close:hover { color: white; }
+.sitemap-content { padding: 24px; }
+.sitemap-section {
+  margin-bottom: 24px;
+}
+.sitemap-section h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--primary);
+}
+.sitemap-section a {
+  display: block;
+  padding: 7px 0;
+  font-size: 13px;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.sitemap-section a:hover {
+  color: var(--primary);
+  padding-left: 6px;
+}
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--primary-dark);
+  color: white;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  z-index: 9999;
+  transition: transform 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ===== SCROLL TO TOP ===== */
+.scroll-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: all 0.2s;
+}
+.scroll-top:hover { background: var(--primary-light); transform: translateY(-2px); }
+.scroll-top.show { display: flex; }
+
+/* ===== HAMBURGER BUTTON ===== */
+.hamburger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: var(--primary);
+  border-radius: 6px;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0;
+  flex-shrink: 0;
+}
+.hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 97;
+}
+.mobile-nav-overlay.show { display: block; }
+
+/* ===== MOBILE SEARCH BAR ===== */
+.mobile-search-bar {
+  display: none;
+  padding: 10px 16px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+.mobile-search-bar .search-box {
+  width: 100%;
+}
+.mobile-search-bar .search-box input {
+  width: 100%;
+}
+
+/* ===== BOTTOM MOBILE NAV ===== */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  z-index: 90;
+  padding: 6px 0;
+  padding-bottom: max(6px, env(safe-area-inset-bottom));
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
+}
+.mobile-bottom-nav-inner {
+  display: flex;
+  justify-content: space-around;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.mobile-bottom-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 12px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  color: var(--text-light);
+  transition: color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.mobile-bottom-item:active { color: var(--primary); }
+.mobile-bottom-item .mb-icon { font-size: 20px; }
+.mobile-bottom-item .mb-label { font-size: 10px; font-weight: 500; }
+
+/* ===== RESPONSIVE - TABLET ===== */
+@media (max-width: 1024px) {
+  .container { padding: 0 16px; }
+  .nav-item > a { padding: 14px 18px; font-size: 14px; }
+  .banner-content h2 { font-size: 32px; }
+}
+
+/* ===== RESPONSIVE - MOBILE ===== */
+@media (max-width: 768px) {
+  body { padding-bottom: 64px; }
+
+  /* Top bar */
+  .top-bar { display: none; }
+
+  /* Header */
+  .header {
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    border-bottom-width: 2px;
+  }
+  .header .container {
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+  .school-logo {
+    width: 40px;
+    height: 40px;
+  }
+  .school-logo .placeholder-text { font-size: 16px; }
+  .school-name-area h1 { font-size: 18px; }
+  .school-name-area p { font-size: 10px; display: none; }
+  .header-left { gap: 10px; }
+
+  .header-right .search-box { display: none; }
+  .header-right .header-icons .icon-btn[title="사이트맵"] { display: none; }
+  .hamburger { display: flex; }
+
+  /* Mobile search bar */
+  .mobile-search-bar { display: block; }
+
+  /* Nav */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100%;
+    z-index: 98;
+    overflow-y: auto;
+    transition: left 0.3s ease;
+    padding-top: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav.open { left: 0; }
+  .nav-list {
+    flex-direction: column;
+  }
+  .nav-item > a {
+    padding: 14px 20px;
+    font-size: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-item > a::after {
+    content: '▸';
+    font-size: 11px;
+    opacity: 0.5;
+    transition: transform 0.2s;
+  }
+  .nav-item.mobile-open > a::after {
+    transform: rotate(90deg);
+  }
+  .nav-dropdown {
+    display: none;
+    position: static;
+    box-shadow: none;
+    border-top: none;
+    background: rgba(0,0,0,0.15);
+    min-width: unset;
+  }
+  .nav-item.mobile-open .nav-dropdown { display: block; }
+  .nav-dropdown a {
+    padding: 11px 20px 11px 32px;
+    color: rgba(255,255,255,0.8);
+    border-bottom-color: rgba(255,255,255,0.05);
+    font-size: 13.5px;
+  }
+  .nav-dropdown a:hover {
+    background: rgba(255,255,255,0.08);
+    color: white;
+    padding-left: 36px;
+  }
+  .nav-item:hover .nav-dropdown { display: none; }
+  .nav-item.mobile-open:hover .nav-dropdown,
+  .nav-item.mobile-open .nav-dropdown { display: block; }
+
+  /* Mobile nav header inside */
+  .nav::before {
+    content: '천서고등학교';
+    display: block;
+    padding: 18px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    letter-spacing: -0.3px;
+  }
+
+  /* Banner */
+  .banner { height: 220px; }
+  .banner-content { padding: 0 24px; }
+  .banner-content h2 { font-size: 20px; margin-bottom: 8px; }
+  .banner-content p { font-size: 13px; }
+  .banner-arrow { width: 36px; height: 36px; font-size: 16px; }
+  .banner-arrow.left { left: 8px; }
+  .banner-arrow.right { right: 8px; }
+  .banner-nav { bottom: 14px; }
+  .banner-dot { width: 10px; height: 10px; }
+
+  /* Quick links */
+  .quick-links-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .quick-link {
+    padding: 16px 6px;
+  }
+  .quick-link-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+  }
+  .quick-link span { font-size: 11.5px; }
+
+  /* Main content */
+  .main-content { padding: 20px 0; }
+  .content-grid { grid-template-columns: 1fr; gap: 16px; }
+
+  /* Notice */
+  .tab-btn { padding: 10px 14px; font-size: 12.5px; }
+  .notice-item { padding: 11px 14px; }
+  .notice-badge { font-size: 10px; padding: 2px 6px; margin-right: 8px; }
+  .notice-title { font-size: 13px; }
+  .notice-date { font-size: 11px; }
+
+  /* Calendar */
+  .calendar-widget { padding: 14px 16px; }
+  .cal-day { font-size: 12px; padding: 8px 0; }
+  .cal-day-name { font-size: 10.5px; }
+
+  /* Student section */
+  .student-section { margin-top: 16px; }
+  .student-header { padding: 16px 18px; }
+  .student-header h3 { font-size: 16px; }
+  .student-header p { font-size: 12px; }
+  .student-body { padding: 16px; }
+  .student-search-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .student-search-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+  }
+  .student-table th { padding: 8px 10px; font-size: 11.5px; }
+  .student-table td { padding: 10px; font-size: 12.5px; }
+  .student-photo-cell { width: 32px; height: 32px; font-size: 14px; }
+  .student-result { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Gallery */
+  .gallery-section { margin-top: 16px; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Info bar */
+  .info-bar { padding: 20px 0; margin-top: 24px; }
+  .info-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .info-stat .number { font-size: 28px; }
+  .info-stat .label { font-size: 12px; }
+
+  /* Footer */
+  .footer { padding: 24px 0 16px; font-size: 11.5px; }
+  .footer-top { flex-direction: column; gap: 16px; }
+  .footer-info p { font-size: 11.5px; }
+  .footer-links { flex-wrap: wrap; gap: 10px; }
+  .footer-bottom { flex-direction: column; gap: 10px; align-items: flex-start; }
+  .footer-badges { flex-wrap: wrap; }
+
+  /* Modals */
+  .modal { max-width: 100%; margin: 0 10px; border-radius: 10px; max-height: 85vh; }
+  .modal-header { padding: 16px 18px; }
+  .modal-header h3 { font-size: 15px; }
+  .modal-body { padding: 18px; }
+  .modal-body .notice-meta { flex-wrap: wrap; gap: 8px; font-size: 12px; }
+
+  /* Popup */
+  .popup { width: calc(100% - 32px); max-width: 380px; }
+
+  /* Sitemap */
+  .sitemap-panel { width: 85vw; max-width: 360px; }
+
+  /* Scroll top - adjust for bottom nav */
+  .scroll-top { bottom: 80px; right: 16px; width: 40px; height: 40px; font-size: 16px; }
+
+  /* Toast - above bottom nav */
+  .toast { bottom: 80px; font-size: 13px; padding: 12px 20px; max-width: calc(100% - 40px); text-align: center; }
+
+  /* Section headers */
+  .section-header { padding: 14px 16px; }
+  .section-header h3 { font-size: 15px; }
+
+  /* Mobile bottom nav show */
+  .mobile-bottom-nav { display: block; }
+
+  /* Login modal on mobile */
+  .login-body .login-icon { width: 52px; height: 52px; font-size: 24px; }
+  .login-form input { padding: 12px; font-size: 15px; }
+  .login-submit { padding: 14px; font-size: 15px; }
+}
+
+/* ===== RESPONSIVE - SMALL MOBILE ===== */
+@media (max-width: 400px) {
+  .school-name-area h1 { font-size: 16px; }
+  .school-logo { width: 36px; height: 36px; }
+  .school-logo .placeholder-text { font-size: 14px; }
+  .header-left { gap: 8px; }
+  .banner { height: 180px; }
+  .banner-content h2 { font-size: 17px; }
+  .banner-content p { font-size: 11.5px; }
+  .quick-links-grid { grid-template-columns: repeat(3, 1fr); }
+  .quick-link { padding: 12px 4px; }
+  .quick-link-icon { width: 36px; height: 36px; font-size: 16px; }
+  .quick-link span { font-size: 10.5px; }
+  .info-stat .number { font-size: 24px; }
+  .tab-btn { padding: 10px 10px; font-size: 11.5px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="container">
+    <a href="#" onclick="openLoginModal(); return false;">로그인</a>
+    <span class="divider">|</span>
+    <a href="#" onclick="openSitemap(); return false;">사이트맵</a>
+    <span class="divider">|</span>
+    <a href="#" onclick="showToast('English 페이지는 준비 중입니다.'); return false;">English</a>
+    <span class="divider">|</span>
+    <a href="#" onclick="showToast('글씨 크기가 조절되었습니다.'); return false;">가 ᄀ</a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="container">
+    <div class="header-left" onclick="location.reload()">
+      <div class="school-logo" id="schoolLogo">
+        <!-- 이미지를 넣으려면 아래 img 태그의 src를 변경하세요 -->
+        <!-- <img src="logo.png" alt="천서고 로고"> -->
+        <span class="placeholder-text">天</span>
+      </div>
+      <div class="school-name-area">
+        <h1>천서고등학교</h1>
+        <p>CHEONSEO HIGH SCHOOL</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="search-box">
+        <input type="text" placeholder="검색어를 입력하세요" id="siteSearch" onkeydown="if(event.key==='Enter')siteSearchAction()">
+        <button onclick="siteSearchAction()">🔍</button>
+      </div>
+      <div class="header-icons">
+        <button class="icon-btn" title="홈" onclick="location.reload()">🏠</button>
+        <button class="icon-btn" title="사이트맵" onclick="openSitemap()">☰</button>
+      </div>
+      <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE SEARCH BAR -->
+<div class="mobile-search-bar">
+  <div class="search-box">
+    <input type="text" placeholder="검색어를 입력하세요" id="mobileSearch" onkeydown="if(event.key==='Enter'){siteSearchAction(); this.blur();}">
+    <button onclick="siteSearchAction()">🔍</button>
+  </div>
+</div>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="toggleMobileNav()"></div>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <ul class="nav-list">
+    <li class="nav-item">
+      <a href="#" onclick="return false;">학교소개</a>
+      <div class="nav-dropdown">
+        <a href="#" onclick="openPage('인사말'); return false;">인사말</a>
+        <a href="#" onclick="openPage('학교연혁'); return false;">학교연혁</a>
+        <a href="#" onclick="openPage('학교상징'); return false;">학교상징</a>
+        <a href="#" onclick="openPage('교직원소개'); return false;">교직원소개</a>
+        <a href="#" onclick="openPage('오시는길'); return false;">오시는길</a>
+        <a href="#" onclick="openPage('학교운영위원회'); return false;">학교운영위원회</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a href="#" onclick="return false;">학교생활</a>
+      <div class="nav-dropdown">
+        <a href="#" onclick="openPage('학교규칙'); return false;">학교규칙</a>
+        <a href="#" onclick="openPage('급식안내'); return false;">급식안내</a>
+        <a href="#" onclick="scrollToStudent(); return false;">재학생확인</a>
+        <a href="#" onclick="openPage('학교생활 안내'); return false;">학교생활 안내</a>
+        <a href="#" onclick="openPage('Wee클래스'); return false;">Wee클래스</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a href="#" onclick="return false;">교육과정</a>
+      <div class="nav-dropdown">
+        <a href="#" onclick="openPage('교육목표'); return false;">교육목표</a>
+        <a href="#" onclick="openPage('교육과정 편성'); return false;">교육과정 편성</a>
+        <a href="#" onclick="openPage('방과후학교'); return false;">방과후학교</a>
+        <a href="#" onclick="openPage('자유학기제'); return false;">자유학기제</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a href="#" onclick="return false;">알림마당</a>
+      <div class="nav-dropdown">
+        <a href="#" onclick="openPage('공지사항'); return false;">공지사항</a>
+        <a href="#" onclick="openPage('가정통신문'); return false;">가정통신문</a>
+        <a href="#" onclick="openPage('학교행사'); return false;">학교행사</a>
+        <a href="#" onclick="openPage('보도자료'); return false;">보도자료</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a href="#" onclick="return false;">참여마당</a>
+      <div class="nav-dropdown">
+        <a href="#" onclick="openPage('학교앨범'); return false;">학교앨범</a>
+        <a href="#" onclick="openPage('자유게시판'); return false;">자유게시판</a>
+        <a href="#" onclick="openPage('건의사항'); return false;">건의사항</a>
+        <a href="#" onclick="openPage('설문조사'); return false;">설문조사</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a href="#" onclick="return false;">정보공개</a>
+      <div class="nav-dropdown">
+        <a href="#" onclick="openPage('학교정보공시'); return false;">학교정보공시</a>
+        <a href="#" onclick="openPage('업무추진비'); return false;">업무추진비</a>
+        <a href="#" onclick="openPage('학교발전기금'); return false;">학교발전기금</a>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<!-- BANNER -->
+<section class="banner">
+  <div class="banner-slides" id="bannerSlides">
+    <div class="banner-slide">
+      <div class="banner-pattern"></div>
+      <div class="banner-content">
+        <h2>꿈과 미래를 여는 천서고등학교</h2>
+        <p>배움으로 세상을 밝히고, 나눔으로 함께 성장하는 교육공동체</p>
+      </div>
+    </div>
+    <div class="banner-slide">
+      <div class="banner-pattern"></div>
+      <div class="banner-content">
+        <h2>2026학년도 신입생 모집안내</h2>
+        <p>천서고등학교에서 여러분의 꿈을 응원합니다</p>
+      </div>
+    </div>
+    <div class="banner-slide">
+      <div class="banner-pattern"></div>
+      <div class="banner-content">
+        <h2>학교폭력 예방 캠페인</h2>
+        <p>모두가 행복한 학교, 함께 만들어갑니다</p>
+      </div>
+    </div>
+  </div>
+  <button class="banner-arrow left" onclick="moveBanner(-1)">◀</button>
+  <button class="banner-arrow right" onclick="moveBanner(1)">▶</button>
+  <div class="banner-nav" id="bannerNav">
+    <button class="banner-dot active" onclick="goToBanner(0)"></button>
+    <button class="banner-dot" onclick="goToBanner(1)"></button>
+    <button class="banner-dot" onclick="goToBanner(2)"></button>
+  </div>
+</section>
+
+<!-- QUICK LINKS -->
+<section class="quick-links">
+  <div class="quick-links-grid">
+    <div class="quick-link" onclick="openPage('공지사항')">
+      <div class="quick-link-icon">📢</div>
+      <span>공지사항</span>
+    </div>
+    <div class="quick-link" onclick="openPage('급식안내')">
+      <div class="quick-link-icon">🍱</div>
+      <span>급식안내</span>
+    </div>
+    <div class="quick-link" onclick="scrollToStudent()">
+      <div class="quick-link-icon">🔍</div>
+      <span>재학생확인</span>
+    </div>
+    <div class="quick-link" onclick="openPage('방과후학교')">
+      <div class="quick-link-icon">📚</div>
+      <span>방과후학교</span>
+    </div>
+    <div class="quick-link" onclick="openPage('학교앨범')">
+      <div class="quick-link-icon">📷</div>
+      <span>학교앨범</span>
+    </div>
+    <div class="quick-link" onclick="openLoginModal()">
+      <div class="quick-link-icon">👤</div>
+      <span>로그인</span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+  <div class="container">
+    <div class="content-grid">
+
+      <!-- NOTICE BOARD -->
+      <div class="section-card">
+        <div class="tab-bar">
+          <button class="tab-btn active" onclick="switchTab(this, 'notice-tab')">공지사항</button>
+          <button class="tab-btn" onclick="switchTab(this, 'letter-tab')">가정통신문</button>
+          <button class="tab-btn" onclick="switchTab(this, 'event-tab')">학교행사</button>
+        </div>
+        <div id="notice-tab" class="tab-content active">
+          <div class="notice-list">
+            <div class="notice-item" onclick="openNotice('2026학년도 1학기 중간고사 시간표 안내', '2026.03.15', '교무기획부', '2026학년도 1학기 중간고사 시간표를 다음과 같이 안내드립니다.\n\n시험 기간: 2026년 4월 21일(화) ~ 4월 24일(금)\n\n자세한 시간표는 첨부파일을 확인해 주시기 바랍니다.\n\n시험 기간 중 등교 시간은 평소와 동일하며, 시험 종료 후 바로 하교합니다.')">
+              <span class="notice-badge badge-important">중요</span>
+              <span class="notice-title">2026학년도 1학기 중간고사 시간표 안내</span>
+              <span class="notice-date">2026.03.15</span>
+              <span class="notice-new"></span>
+            </div>
+            <div class="notice-item" onclick="openNotice('학교폭력 예방교육 실시 안내', '2026.03.12', '생활인권부', '학교폭력 예방 및 대책에 관한 법률에 의거하여 학교폭력 예방교육을 실시합니다.\n\n일시: 2026년 3월 20일(금) 5~6교시\n대상: 전교생\n장소: 대강당\n\n학생들의 적극적인 참여를 부탁드립니다.')">
+              <span class="notice-badge badge-notice">공지</span>
+              <span class="notice-title">학교폭력 예방교육 실시 안내</span>
+              <span class="notice-date">2026.03.12</span>
+              <span class="notice-new"></span>
+            </div>
+            <div class="notice-item" onclick="openNotice('2026학년도 학생회 임원 선거 결과', '2026.03.10', '학생자치부', '2026학년도 학생회 임원 선거가 3월 8일에 실시되었으며, 결과를 안내드립니다.\n\n투표율: 94.2%\n\n당선자 명단은 학생회 게시판에서 확인하실 수 있습니다.')">
+              <span class="notice-badge badge-notice">공지</span>
+              <span class="notice-title">2026학년도 학생회 임원 선거 결과</span>
+              <span class="notice-date">2026.03.10</span>
+            </div>
+            <div class="notice-item" onclick="openNotice('3월 학교 급식 식단표', '2026.03.01', '영양교육부', '3월 학교 급식 식단표를 안내드립니다.\n\n알레르기 유발 식품 표시를 확인하시고, 해당 학생은 담임선생님께 미리 말씀해 주세요.\n\n식단은 학교 사정에 의해 변경될 수 있습니다.')">
+              <span class="notice-badge badge-event">안내</span>
+              <span class="notice-title">3월 학교 급식 식단표</span>
+              <span class="notice-date">2026.03.01</span>
+            </div>
+            <div class="notice-item" onclick="openNotice('개인정보 처리방침 개정 안내', '2026.02.28', '행정실', '개인정보 보호법 개정에 따라 본교 개인정보 처리방침이 일부 변경되었음을 안내드립니다.\n\n시행일: 2026년 3월 1일\n\n자세한 내용은 학교 홈페이지 하단의 개인정보처리방침에서 확인하실 수 있습니다.')">
+              <span class="notice-badge badge-notice">공지</span>
+              <span class="notice-title">개인정보 처리방침 개정 안내</span>
+              <span class="notice-date">2026.02.28</span>
+            </div>
+          </div>
+        </div>
+        <div id="letter-tab" class="tab-content">
+          <div class="notice-list">
+            <div class="notice-item" onclick="openNotice('학부모 총회 참석 안내', '2026.03.14', '교무기획부', '2026학년도 학부모 총회를 아래와 같이 개최하오니 많은 참석 바랍니다.\n\n일시: 2026년 3월 25일(수) 14:00\n장소: 본관 대강당')">
+              <span class="notice-badge badge-important">중요</span>
+              <span class="notice-title">학부모 총회 참석 안내</span>
+              <span class="notice-date">2026.03.14</span>
+              <span class="notice-new"></span>
+            </div>
+            <div class="notice-item" onclick="openNotice('건강검진 실시 안내', '2026.03.08', '보건실', '학교보건법에 의거하여 건강검진을 실시합니다.\n\n대상: 1학년 전체\n일시: 2026년 3월 22일(월)~23일(화)')">
+              <span class="notice-badge badge-notice">공지</span>
+              <span class="notice-title">건강검진 실시 안내</span>
+              <span class="notice-date">2026.03.08</span>
+            </div>
+            <div class="notice-item" onclick="openNotice('교복 하복 주문 안내', '2026.03.05', '행정실', '하복 교복 주문을 받습니다.\n\n주문 기간: 3월 5일 ~ 3월 15일\n수령: 4월 중 예정')">
+              <span class="notice-badge badge-event">안내</span>
+              <span class="notice-title">교복 하복 주문 안내</span>
+              <span class="notice-date">2026.03.05</span>
+            </div>
+          </div>
+        </div>
+        <div id="event-tab" class="tab-content">
+          <div class="notice-list">
+            <div class="notice-item" onclick="openNotice('교내 체육대회', '2026.04.15', '체육교육부', '2026학년도 교내 체육대회를 개최합니다.\n\n일시: 2026년 5월 10일(금)\n장소: 운동장 및 체육관\n\n우천 시 익일로 연기됩니다.')">
+              <span class="notice-badge badge-event">행사</span>
+              <span class="notice-title">교내 체육대회 (5/10)</span>
+              <span class="notice-date">2026.04.15</span>
+            </div>
+            <div class="notice-item" onclick="openNotice('천서제 (학교축제)', '2026.03.10', '학생자치부', '2026학년도 천서제를 아래와 같이 실시합니다.\n\n일시: 2026년 9월 26일(금) ~ 27일(토)\n\n부스 신청은 4월 중 학생회를 통해 진행됩니다.')">
+              <span class="notice-badge badge-event">행사</span>
+              <span class="notice-title">천서제 (학교축제, 9/26~27)</span>
+              <span class="notice-date">2026.03.10</span>
+            </div>
+            <div class="notice-item" onclick="openNotice('진로체험의 날', '2026.03.08', '진로교육부', '직업 체험 및 진로 탐색 프로그램을 실시합니다.\n\n일시: 2026년 4월 25일(금)\n대상: 2학년')">
+              <span class="notice-badge badge-event">행사</span>
+              <span class="notice-title">진로체험의 날 (4/25)</span>
+              <span class="notice-date">2026.03.08</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CALENDAR -->
+      <div class="section-card">
+        <div class="section-header">
+          <h3>📅 학사일정</h3>
+          <span class="more-btn" onclick="openPage('학사일정')">더보기 ▸</span>
+        </div>
+        <div class="calendar-widget">
+          <div class="cal-header">
+            <button class="cal-nav"><button onclick="changeMonth(-1)">◀</button></button>
+            <h4 id="calTitle">2026년 2월</h4>
+            <button class="cal-nav"><button onclick="changeMonth(1)">▶</button></button>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+          <div class="cal-events" id="calEvents"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STUDENT LOOKUP -->
+    <div class="student-section" id="studentSection">
+      <div class="student-card">
+        <div class="student-header">
+          <h3>🔍 재학생 확인</h3>
+          <p>천서고등학교 재학생 여부를 확인할 수 있습니다</p>
+        </div>
+        <div class="student-body">
+          <div class="student-search-row">
+            <div class="student-input-group">
+              <label>학년</label>
+              <select id="studentGrade">
+                <option value="">선택</option>
+                <option value="1">1학년</option>
+                <option value="2">2학년</option>
+                <option value="3">3학년</option>
+              </select>
+            </div>
+            <div class="student-input-group">
+              <label>반</label>
+              <select id="studentClass">
+                <option value="">선택</option>
+                <option value="1">1반</option>
+                <option value="2">2반</option>
+                <option value="3">3반</option>
+                <option value="4">4반</option>
+                <option value="5">5반</option>
+                <option value="6">6반</option>
+                <option value="7">7반</option>
+                <option value="8">8반</option>
+              </select>
+            </div>
+            <div class="student-input-group">
+              <label>이름</label>
+              <input type="text" id="studentName" placeholder="학생 이름 입력" onkeydown="if(event.key==='Enter')searchStudent()">
+            </div>
+            <button class="student-search-btn" onclick="searchStudent()">조회</button>
+          </div>
+
+          <div class="student-result" id="studentResult"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GALLERY -->
+    <div class="gallery-section">
+      <div class="section-card">
+        <div class="section-header">
+          <h3>📷 학교앨범</h3>
+          <span class="more-btn" onclick="openPage('학교앨범')">더보기 ▸</span>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <div class="gallery-placeholder">
+              <span>🏫</span>
+              <small>학교 전경</small>
+            </div>
+            <div class="gallery-overlay">학교 전경</div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-placeholder">
+              <span>🎓</span>
+              <small>입학식</small>
+            </div>
+            <div class="gallery-overlay">2026 입학식</div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-placeholder">
+              <span>🏃</span>
+              <small>체육대회</small>
+            </div>
+            <div class="gallery-overlay">체육대회</div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-placeholder">
+              <span>🎭</span>
+              <small>천서제</small>
+            </div>
+            <div class="gallery-overlay">천서제</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- INFO BAR -->
+<section class="info-bar">
+  <div class="container">
+    <div class="info-grid">
+      <div class="info-stat" onclick="showToast('2026학년도 기준 재학생 현황입니다.')">
+        <div class="number" id="statStudents">0</div>
+        <div class="label">재학생 수</div>
+      </div>
+      <div class="info-stat" onclick="showToast('전임교원 기준입니다.')">
+        <div class="number" id="statTeachers">0</div>
+        <div class="label">교직원 수</div>
+      </div>
+      <div class="info-stat" onclick="showToast('1973년 개교')">
+        <div class="number" id="statHistory">0</div>
+        <div class="label">년 역사</div>
+      </div>
+      <div class="info-stat" onclick="showToast('2025년 졸업생 포함')">
+        <div class="number" id="statGraduates">0</div>
+        <div class="label">졸업생 수</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-info">
+        <p><strong>천서고등학교</strong></p>
+        <p>우) 06012 서울특별시 강남구 천서로 123</p>
+        <p>교무실: 02-1234-5678 | 행정실: 02-1234-5679 | 팩스: 02-1234-5680</p>
+        <p>이메일: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="35565d505a5b46505a7546565d5a5a591b525a1b5e47">[email&#160;protected]</a></p>
+      </div>
+      <div class="footer-links">
+        <a class="footer-link important" href="#" onclick="openPopup('privacy'); return false;">개인정보처리방침</a>
+        <a class="footer-link" href="#" onclick="openPopup('email'); return false;">이메일무단수집거부</a>
+        <a class="footer-link" href="#" onclick="openPopup('copyright'); return false;">저작권보호정책</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copyright">Copyright © 2026 천서고등학교. All Rights Reserved.</div>
+      <div class="footer-badges">
+        <span class="footer-badge" onclick="showToast('교육부 홈페이지로 이동합니다. (데모)')">교육부</span>
+        <span class="footer-badge" onclick="showToast('서울시교육청 홈페이지로 이동합니다. (데모)')">서울시교육청</span>
+        <span class="footer-badge" onclick="showToast('학교알리미 홈페이지로 이동합니다. (데모)')">학교알리미</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- MOBILE BOTTOM NAV -->
+<div class="mobile-bottom-nav">
+  <div class="mobile-bottom-nav-inner">
+    <button class="mobile-bottom-item" onclick="location.reload()">
+      <span class="mb-icon">🏠</span>
+      <span class="mb-label">홈</span>
+    </button>
+    <button class="mobile-bottom-item" onclick="openPage('공지사항')">
+      <span class="mb-icon">📢</span>
+      <span class="mb-label">공지</span>
+    </button>
+    <button class="mobile-bottom-item" onclick="scrollToStudent()">
+      <span class="mb-icon">🔍</span>
+      <span class="mb-label">재학생</span>
+    </button>
+    <button class="mobile-bottom-item" onclick="openPage('급식안내')">
+      <span class="mb-icon">🍱</span>
+      <span class="mb-label">급식</span>
+    </button>
+    <button class="mobile-bottom-item" onclick="toggleMobileNav()">
+      <span class="mb-icon">☰</span>
+      <span class="mb-label">메뉴</span>
+    </button>
+  </div>
+</div>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">▲</button>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- NOTICE MODAL -->
+<div class="modal-overlay" id="noticeModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">공지사항 제목</h3>
+      <button class="modal-close" onclick="closeModal('noticeModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="notice-meta">
+        <span id="modalDate">📅 2026.03.15</span>
+        <span id="modalAuthor">✏️ 교무기획부</span>
+        <span>👁️ 조회수 128</span>
+      </div>
+      <div class="notice-content" id="modalContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal" style="max-width: 420px;">
+    <div class="modal-header">
+      <h3>로그인</h3>
+      <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+    </div>
+    <div class="modal-body login-body">
+      <div class="login-icon">👤</div>
+      <p style="font-size:14px; color:var(--text-light);">천서고등학교 통합 로그인</p>
+      <div class="login-form">
+        <label>아이디</label>
+        <input type="text" placeholder="아이디를 입력하세요" id="loginId">
+        <label>비밀번호</label>
+        <input type="password" placeholder="비밀번호를 입력하세요" id="loginPw" onkeydown="if(event.key==='Enter')attemptLogin()">
+        <button class="login-submit" onclick="attemptLogin()">로그인</button>
+      </div>
+      <div class="login-options">
+        <a onclick="showToast('아이디 찾기 페이지는 준비 중입니다.')">아이디 찾기</a>
+        <a onclick="showToast('비밀번호 찾기 페이지는 준비 중입니다.')">비밀번호 찾기</a>
+        <a onclick="showToast('회원가입 페이지는 준비 중입니다.')">회원가입</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- POPUP (Privacy etc) -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup">
+    <div class="popup-header">
+      <h4 id="popupTitle">안내</h4>
+      <button class="popup-close" onclick="closePopup()">✕</button>
+    </div>
+    <div class="popup-body" id="popupBody"></div>
+    <div class="popup-footer">
+      <button class="popup-btn popup-btn-primary" onclick="closePopup()">확인</button>
+    </div>
+  </div>
+</div>
+
+<!-- SITEMAP PANEL -->
+<div class="sitemap-overlay" id="sitemapOverlay" onclick="closeSitemap()"></div>
+<div class="sitemap-panel" id="sitemapPanel">
+  <div class="sitemap-header">
+    <h3>사이트맵</h3>
+    <button class="sitemap-close" onclick="closeSitemap()">✕</button>
+  </div>
+  <div class="sitemap-content">
+    <div class="sitemap-section">
+      <h4>학교소개</h4>
+      <a onclick="closeSitemap(); openPage('인사말')">인사말</a>
+      <a onclick="closeSitemap(); openPage('학교연혁')">학교연혁</a>
+      <a onclick="closeSitemap(); openPage('학교상징')">학교상징</a>
+      <a onclick="closeSitemap(); openPage('교직원소개')">교직원소개</a>
+      <a onclick="closeSitemap(); openPage('오시는길')">오시는길</a>
+      <a onclick="closeSitemap(); openPage('학교운영위원회')">학교운영위원회</a>
+    </div>
+    <div class="sitemap-section">
+      <h4>학교생활</h4>
+      <a onclick="closeSitemap(); openPage('학교규칙')">학교규칙</a>
+      <a onclick="closeSitemap(); openPage('급식안내')">급식안내</a>
+      <a onclick="closeSitemap(); scrollToStudent()">재학생확인</a>
+      <a onclick="closeSitemap(); openPage('학교생활 안내')">학교생활 안내</a>
+      <a onclick="closeSitemap(); openPage('Wee클래스')">Wee클래스</a>
+    </div>
+    <div class="sitemap-section">
+      <h4>교육과정</h4>
+      <a onclick="closeSitemap(); openPage('교육목표')">교육목표</a>
+      <a onclick="closeSitemap(); openPage('교육과정 편성')">교육과정 편성</a>
+      <a onclick="closeSitemap(); openPage('방과후학교')">방과후학교</a>
+      <a onclick="closeSitemap(); openPage('자유학기제')">자유학기제</a>
+    </div>
+    <div class="sitemap-section">
+      <h4>알림마당</h4>
+      <a onclick="closeSitemap(); openPage('공지사항')">공지사항</a>
+      <a onclick="closeSitemap(); openPage('가정통신문')">가정통신문</a>
+      <a onclick="closeSitemap(); openPage('학교행사')">학교행사</a>
+      <a onclick="closeSitemap(); openPage('보도자료')">보도자료</a>
+    </div>
+    <div class="sitemap-section">
+      <h4>참여마당</h4>
+      <a onclick="closeSitemap(); openPage('학교앨범')">학교앨범</a>
+      <a onclick="closeSitemap(); openPage('자유게시판')">자유게시판</a>
+      <a onclick="closeSitemap(); openPage('건의사항')">건의사항</a>
+      <a onclick="closeSitemap(); openPage('설문조사')">설문조사</a>
+    </div>
+    <div class="sitemap-section">
+      <h4>정보공개</h4>
+      <a onclick="closeSitemap(); openPage('학교정보공시')">학교정보공시</a>
+      <a onclick="closeSitemap(); openPage('업무추진비')">업무추진비</a>
+      <a onclick="closeSitemap(); openPage('학교발전기금')">학교발전기금</a>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ===== STUDENT DATABASE =====
+// 여기에 캐챗에 사용할 학생 데이터를 추가/수정하세요!
+const studentDB = [
+  { grade: 2, class: 3, number: 1, name: '강소은', status: '재학', gender: '여' },
+  { grade: 2, class: 3, number: 2, name: '강민수', status: '재학', gender: '남' },
+  { grade: 2, class: 3, number: 3, name: '고예진', status: '재학', gender: '여' },
+  { grade: 2, class: 3, number: 4, name: '김도윤', status: '재학', gender: '남' },
+  { grade: 2, class: 3, number: 5, name: '김서연', status: '재학', gender: '여' },
+  { grade: 2, class: 3, number: 6, name: '김영훈', status: '재학', gender: '남' },
+  { grade: 2, class: 3, number: 7, name: '김하늘', status: '재학', gender: '여' },
+  { grade: 2, class: 3, number: 8, name: '나현우', status: '재학', gender: '남' },
+  { grade: 2, class: 3, number: 9, name: '박은비', status: '재학', gender: '여' },
+  { grade: 2, class: 3, number: 10, name: '박지훈', status: '재학', gender: '남' },
+  { grade: 2, class: 3, number: 11, name: '서윤아', status: '재학', gender: '여' },
+  { grade: 2, class: 3, number: 12, name: '손태영', status: '재학', gender: '남' },
+  { grade: 2, class: 3, number: 13, name: '신유진', status: '재학', gender: '여' },
+  { grade: 2, class: 3, number: 14, name: '안성민', status: '재학', gender: '남' },
+  { grade: 2, class: 3, number: 15, name: '오수빈', status: '재학', gender: '여' },
+  { grade: 2, class: 3, number: 16, name: '이수현', status: '재학', gender: '여' },
+  { grade: 2, class: 3, number: 17, name: '이준혁', status: '재학', gender: '남' },
+  { grade: 2, class: 3, number: 18, name: '임채원', status: '재학', gender: '여' },
+  { grade: 2, class: 3, number: 19, name: '장우진', status: '재학', gender: '남' },
+  { grade: 2, class: 3, number: 20, name: '전소미', status: '재학', gender: '여' },
+  { grade: 2, class: 3, number: 21, name: '정다은', status: '재학', gender: '여' },
+  { grade: 2, class: 3, number: 22, name: '정시우', status: '재학', gender: '남' },
+  { grade: 2, class: 3, number: 23, name: '조은서', status: '재학', gender: '여' },
+  { grade: 2, class: 3, number: 24, name: '최민재', status: '재학', gender: '남' },
+  { grade: 2, class: 3, number: 25, name: '한소희', status: '재학', gender: '여' },
+  { grade: 1, class: 1, number: 1, name: '김태현', status: '재학', gender: '남' },
+  { grade: 1, class: 1, number: 2, name: '이수아', status: '재학', gender: '여' },
+  { grade: 1, class: 1, number: 3, name: '박민서', status: '재학', gender: '여' },
+  { grade: 1, class: 2, number: 1, name: '최유나', status: '재학', gender: '여' },
+  { grade: 1, class: 2, number: 2, name: '장현우', status: '재학', gender: '남' },
+  { grade: 3, class: 1, number: 1, name: '윤서진', status: '재학', gender: '여' },
+  { grade: 3, class: 1, number: 2, name: '한도현', status: '재학', gender: '남' },
+  { grade: 3, class: 2, number: 1, name: '송예린', status: '재학', gender: '여' },
+];
+
+// ===== BANNER =====
+let currentBanner = 0;
+const totalBanners = 3;
+
+function moveBanner(dir) {
+  currentBanner = (currentBanner + dir + totalBanners) % totalBanners;
+  updateBanner();
+}
+
+function goToBanner(idx) {
+  currentBanner = idx;
+  updateBanner();
+}
+
+function updateBanner() {
+  document.getElementById('bannerSlides').style.transform = `translateX(-${currentBanner * 33.333}%)`;
+  document.querySelectorAll('.banner-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === currentBanner);
+  });
+}
+
+setInterval(() => moveBanner(1), 5000);
+
+// ===== TABS =====
+function switchTab(btn, tabId) {
+  btn.closest('.section-card').querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  btn.closest('.section-card').querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+}
+
+// ===== CALENDAR =====
+let calYear = 2026, calMonth = 1; // 0-indexed: 1 = February
+
+const schoolEvents = {
+  '2026-02-20': '개학준비',
+  '2026-03-02': '개학식',
+  '2026-03-03': '삼일절 대체공휴일',
+  '2026-03-08': '학생회 선거',
+  '2026-03-20': '학폭예방교육',
+  '2026-03-25': '학부모총회',
+  '2026-04-21': '중간고사',
+  '2026-04-22': '중간고사',
+  '2026-04-23': '중간고사',
+  '2026-04-24': '중간고사',
+  '2026-04-25': '진로체험의 날',
+  '2026-05-05': '어린이날',
+  '2026-05-10': '체육대회',
+};
+
+function renderCalendar() {
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const daysInPrev = new Date(calYear, calMonth, 0).getDate();
+  const today = new Date();
+
+  document.getElementById('calTitle').textContent = `${calYear}년 ${calMonth + 1}월`;
+
+  let html = ['일','월','화','수','목','금','토'].map((d,i) => 
+    `<div class="cal-day-name">${d}</div>`
+  ).join('');
+
+  // Previous month
+  for (let i = firstDay - 1; i >= 0; i--) {
+    html += `<div class="cal-day other-month">${daysInPrev - i}</div>`;
+  }
+
+  // Current month
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const dow = new Date(calYear, calMonth, d).getDay();
+    const isToday = (calYear === today.getFullYear() && calMonth === today.getMonth() && d === today.getDate());
+    const hasEvent = schoolEvents[dateStr];
+    let cls = 'cal-day';
+    if (isToday) cls += ' today';
+    if (hasEvent) cls += ' has-event';
+    if (dow === 0) cls += ' sunday';
+    if (dow === 6) cls += ' saturday';
+    html += `<div class="${cls}" onclick="showToast('${dateStr}${hasEvent ? ' - ' + hasEvent : ''}')" title="${hasEvent || ''}">${d}</div>`;
+  }
+
+  // Next month
+  const totalCells = firstDay + daysInMonth;
+  const remaining = (7 - (totalCells % 7)) % 7;
+  for (let i = 1; i <= remaining; i++) {
+    html += `<div class="cal-day other-month">${i}</div>`;
+  }
+
+  document.getElementById('calGrid').innerHTML = html;
+
+  // Events list
+  const monthKey = `${calYear}-${String(calMonth+1).padStart(2,'0')}`;
+  const monthEvents = Object.entries(schoolEvents)
+    .filter(([k]) => k.startsWith(monthKey))
+    .sort(([a],[b]) => a.localeCompare(b));
+
+  const colors = ['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6'];
+  let eventsHtml = monthEvents.map(([date, title], i) => {
+    const day = parseInt(date.split('-')[2]);
+    return `<div class="cal-event-item" onclick="showToast('${title}')">
+      <div class="cal-event-dot" style="background:${colors[i % colors.length]}"></div>
+      <span class="cal-event-date">${calMonth+1}/${day}</span>
+      <span class="cal-event-text">${title}</span>
+    </div>`;
+  }).join('');
+
+  if (!monthEvents.length) {
+    eventsHtml = '<p style="font-size:13px;color:#aaa;text-align:center;padding:10px 0;">이번 달 일정이 없습니다.</p>';
+  }
+
+  document.getElementById('calEvents').innerHTML = eventsHtml;
+}
+
+function changeMonth(dir) {
+  calMonth += dir;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  if (calMonth < 0) { calMonth = 11; calYear--; }
+  renderCalendar();
+}
+
+renderCalendar();
+
+// ===== STUDENT SEARCH =====
+function searchStudent() {
+  const grade = document.getElementById('studentGrade').value;
+  const cls = document.getElementById('studentClass').value;
+  const name = document.getElementById('studentName').value.trim();
+  const resultDiv = document.getElementById('studentResult');
+
+  if (!name && !grade && !cls) {
+    showToast('검색 조건을 입력해주세요.');
+    return;
+  }
+
+  let results = studentDB.filter(s => {
+    if (grade && s.grade !== parseInt(grade)) return false;
+    if (cls && s.class !== parseInt(cls)) return false;
+    if (name && !s.name.includes(name)) return false;
+    return true;
+  });
+
+  if (results.length > 0) {
+    let html = `<div class="student-result-header">✅ 검색 결과 (${results.length}명)</div>`;
+    html += '<table class="student-table">';
+    html += '<thead><tr><th></th><th>학년</th><th>반</th><th>번호</th><th>이름</th><th>상태</th></tr></thead>';
+    html += '<tbody>';
+    results.forEach(s => {
+      html += `<tr>
+        <td><div class="student-photo-cell">${s.gender === '여' ? '👩' : '👨'}</div></td>
+        <td>${s.grade}학년</td>
+        <td>${s.class}반</td>
+        <td>${s.number}번</td>
+        <td><strong>${s.name}</strong></td>
+        <td><span class="status-badge ${s.status === '재학' ? 'status-enrolled' : 'status-graduated'}">${s.status}</span></td>
+      </tr>`;
+    });
+    html += '</tbody></table>';
+    resultDiv.innerHTML = html;
+  } else {
+    resultDiv.innerHTML = `<div class="student-no-result"><span>😔</span>검색 결과가 없습니다.<br><small style="color:#bbb">학년, 반, 이름을 다시 확인해주세요.</small></div>`;
+  }
+
+  resultDiv.classList.add('show');
+}
+
+function scrollToStudent() {
+  document.getElementById('studentSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// ===== NOTICE MODAL =====
+function openNotice(title, date, author, content) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalDate').textContent = '📅 ' + date;
+  document.getElementById('modalAuthor').textContent = '✏️ ' + author;
+  document.getElementById('modalContent').innerHTML = content.split('\n').map(p => p ? `<p>${p}</p>` : '<br>').join('');
+  document.getElementById('noticeModal').classList.add('show');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('show');
+}
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('show');
+  });
+});
+
+// ===== LOGIN =====
+function openLoginModal() {
+  document.getElementById('loginModal').classList.add('show');
+  setTimeout(() => document.getElementById('loginId').focus(), 100);
+}
+
+function attemptLogin() {
+  const id = document.getElementById('loginId').value;
+  const pw = document.getElementById('loginPw').value;
+  if (!id || !pw) {
+    showToast('아이디와 비밀번호를 입력해주세요.');
+    return;
+  }
+  showToast('로그인 기능은 데모 버전에서 지원되지 않습니다.');
+  closeModal('loginModal');
+}
+
+// ===== POPUP =====
+function openPopup(type) {
+  const titles = {
+    privacy: '개인정보처리방침',
+    email: '이메일무단수집거부',
+    copyright: '저작권보호정책'
+  };
+  const bodies = {
+    privacy: '천서고등학교는 「개인정보 보호법」에 따라 학생 및 학부모의 개인정보를 보호하고, 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 다음과 같이 개인정보 처리방침을 수립·공개합니다.<br><br>1. 개인정보의 처리 목적<br>2. 개인정보의 처리 및 보유 기간<br>3. 처리하는 개인정보의 항목<br>4. 개인정보의 파기절차 및 파기방법<br>5. 개인정보의 안전성 확보조치<br><br>자세한 내용은 학교 행정실로 문의해 주세요.',
+    email: '본 홈페이지에 게시된 이메일 주소가 전자우편 수집 프로그램이나 그 밖의 기술적 장치를 이용하여 무단으로 수집되는 것을 거부하며, 이를 위반 시 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」에 의해 형사 처벌됨을 유념하시기 바랍니다.',
+    copyright: '천서고등학교 홈페이지에 게재된 모든 콘텐츠에 대한 저작권은 천서고등학교에 있습니다. 사전 승인 없이 텍스트, 이미지 등의 무단 복제, 전송, 배포를 금합니다.'
+  };
+  document.getElementById('popupTitle').textContent = titles[type];
+  document.getElementById('popupBody').innerHTML = bodies[type];
+  document.getElementById('popupOverlay').classList.add('show');
+}
+
+function closePopup() {
+  document.getElementById('popupOverlay').classList.remove('show');
+}
+
+// ===== SITEMAP =====
+function openSitemap() {
+  document.getElementById('sitemapOverlay').classList.add('show');
+  document.getElementById('sitemapPanel').classList.add('show');
+}
+
+function closeSitemap() {
+  document.getElementById('sitemapOverlay').classList.remove('show');
+  document.getElementById('sitemapPanel').classList.remove('show');
+}
+
+// ===== TOAST =====
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+// ===== PAGE NAVIGATION =====
+function openPage(pageName) {
+  showToast(`"${pageName}" 페이지로 이동합니다. (데모)`);
+}
+
+// ===== SEARCH =====
+function siteSearchAction() {
+  const q = document.getElementById('siteSearch').value.trim();
+  if (!q) { showToast('검색어를 입력해주세요.'); return; }
+  showToast(`"${q}" 검색 결과 페이지로 이동합니다. (데모)`);
+}
+
+// ===== SCROLL TO TOP =====
+window.addEventListener('scroll', () => {
+  document.getElementById('scrollTopBtn').classList.toggle('show', window.scrollY > 400);
+});
+
+// ===== ANIMATED COUNTERS =====
+function animateCounter(el, target, duration) {
+  let start = 0;
+  const step = target / (duration / 16);
+  const timer = setInterval(() => {
+    start += step;
+    if (start >= target) {
+      el.textContent = target.toLocaleString();
+      clearInterval(timer);
+    } else {
+      el.textContent = Math.floor(start).toLocaleString();
+    }
+  }, 16);
+}
+
+// Start counters when visible
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(document.getElementById('statStudents'), 847, 1200);
+      animateCounter(document.getElementById('statTeachers'), 68, 1000);
+      animateCounter(document.getElementById('statHistory'), 53, 800);
+      animateCounter(document.getElementById('statGraduates'), 28450, 1500);
+      observer.disconnect();
+    }
+  });
+});
+observer.observe(document.querySelector('.info-bar'));
+
+// ===== KEYBOARD SHORTCUTS =====
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeModal('noticeModal');
+    closeModal('loginModal');
+    closePopup();
+    closeSitemap();
+    if (document.querySelector('.nav.open')) toggleMobileNav();
+  }
+});
+
+// ===== MOBILE NAVIGATION =====
+function toggleMobileNav() {
+  const nav = document.querySelector('.nav');
+  const overlay = document.getElementById('mobileNavOverlay');
+  const hamburger = document.getElementById('hamburgerBtn');
+  const isOpen = nav.classList.contains('open');
+  
+  nav.classList.toggle('open');
+  overlay.classList.toggle('show');
+  hamburger.classList.toggle('active');
+  document.body.style.overflow = isOpen ? '' : 'hidden';
+}
+
+// Mobile nav accordion
+document.querySelectorAll('.nav-item > a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    if (window.innerWidth <= 768) {
+      e.preventDefault();
+      e.stopPropagation();
+      const parent = this.parentElement;
+      const wasOpen = parent.classList.contains('mobile-open');
+      document.querySelectorAll('.nav-item.mobile-open').forEach(item => {
+        if (item !== parent) item.classList.remove('mobile-open');
+      });
+      parent.classList.toggle('mobile-open', !wasOpen);
+    }
+  });
+});
+
+// Close mobile nav when dropdown link clicked
+document.querySelectorAll('.nav-dropdown a').forEach(link => {
+  link.addEventListener('click', function() {
+    if (window.innerWidth <= 768 && document.querySelector('.nav.open')) {
+      setTimeout(() => {
+        toggleMobileNav();
+        document.querySelectorAll('.nav-item.mobile-open').forEach(item => {
+          item.classList.remove('mobile-open');
+        });
+      }, 100);
+    }
+  });
+});
+
+// Reset on resize
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768) {
+    const nav = document.querySelector('.nav');
+    const overlay = document.getElementById('mobileNavOverlay');
+    const hamburger = document.getElementById('hamburgerBtn');
+    if (nav) nav.classList.remove('open');
+    if (overlay) overlay.classList.remove('show');
+    if (hamburger) hamburger.classList.remove('active');
+    document.body.style.overflow = '';
+    document.querySelectorAll('.nav-item.mobile-open').forEach(item => {
+      item.classList.remove('mobile-open');
+    });
+  }
+});
+</script>
+
+</body>
+  </html>
