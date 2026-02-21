@@ -597,147 +597,47 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 .cal-event-date { color: var(--text-light); font-size: 11.5px; flex-shrink: 0; min-width: 40px; }
 .cal-event-text { transition: color 0.15s; }
 
-/* ===== STUDENT LOOKUP ===== */
-.student-section {
-  margin-top: 28px;
-}
-.student-card {
-  background: var(--white);
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-  border: 1px solid #eee;
-  overflow: hidden;
-}
-.student-header {
-  background: linear-gradient(135deg, var(--primary), var(--primary-light));
-  padding: 20px 24px;
-  color: white;
-}
-.student-header h3 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-.student-header p {
-  font-size: 13px;
-  opacity: 0.8;
-}
-.student-body { padding: 24px; }
-.student-search-row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-.student-input-group {
-  flex: 1;
-  position: relative;
-}
-.student-input-group label {
-  display: block;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-light);
-  margin-bottom: 6px;
-}
-.student-input-group select,
-.student-input-group input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1.5px solid var(--border);
-  border-radius: 6px;
-  font-size: 13.5px;
-  font-family: inherit;
-  outline: none;
-  transition: border-color 0.2s;
-  background: var(--white);
-  color: var(--text);
-}
-.student-input-group select:focus,
-.student-input-group input:focus {
-  border-color: var(--primary-light);
-}
-.student-search-btn {
-  align-self: flex-end;
-  padding: 10px 28px;
-  background: var(--primary);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-  transition: all 0.2s;
-  white-space: nowrap;
-}
-.student-search-btn:hover { background: var(--primary-light); }
+/* ===== STUDENT DIRECTORY ===== */
+.student-section { margin-top: 28px; }
+.student-card { background: var(--white); border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); border: 1px solid #eee; overflow: hidden; }
+.student-header { background: linear-gradient(135deg, var(--primary), var(--primary-light)); padding: 20px 24px; color: white; }
+.student-header h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+.student-header p { font-size: 13px; opacity: 0.8; }
+.student-body { padding: 0; }
 
-.student-result {
-  display: none;
-  margin-top: 20px;
-  border: 1.5px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-}
-.student-result.show { display: block; }
-.student-result-header {
-  background: #f8fafc;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--primary);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.student-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.student-table th {
-  background: #fafafa;
-  padding: 10px 14px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--text-light);
-  text-align: left;
-  border-bottom: 1px solid #eee;
-}
-.student-table td {
-  padding: 12px 14px;
-  font-size: 13.5px;
-  border-bottom: 1px solid #f5f5f5;
-}
-.student-table tr:last-child td { border-bottom: none; }
-.student-table tr:hover td { background: var(--hover-bg); }
-.status-badge {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 11.5px;
-  font-weight: 600;
-}
+/* Grade tabs */
+.grade-tabs { display: flex; border-bottom: 2px solid var(--primary); }
+.grade-tab { flex: 1; padding: 13px 0; text-align: center; font-size: 14px; font-weight: 600; cursor: pointer; background: #f8fafc; color: var(--text-light); border: none; font-family: inherit; transition: all 0.2s; border-right: 1px solid #eee; position: relative; }
+.grade-tab:last-child { border-right: none; }
+.grade-tab:hover { background: var(--hover-bg); color: var(--primary); }
+.grade-tab.active { background: var(--primary); color: white; }
+.grade-tab .grade-count { font-size: 11px; font-weight: 400; opacity: 0.7; margin-left: 4px; }
+
+/* Class chips */
+.class-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 16px 20px; border-bottom: 1px solid #f0f0f0; background: #fcfcfc; }
+.class-chip { padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1.5px solid var(--border); background: var(--white); color: var(--text); font-family: inherit; transition: all 0.2s; }
+.class-chip:hover { border-color: var(--primary-light); color: var(--primary); }
+.class-chip.active { background: var(--primary); color: white; border-color: var(--primary); }
+.class-chip .chip-count { font-size: 11px; opacity: 0.7; margin-left: 2px; }
+
+/* Student grid */
+.student-grid-wrap { padding: 16px 20px; min-height: 120px; }
+.student-grid-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; font-size: 13px; color: var(--text-light); }
+.student-grid-info strong { color: var(--primary); font-size: 14px; }
+.student-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.student-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #f0f0f0; border-radius: 8px; cursor: default; transition: all 0.15s; background: var(--white); }
+.student-item:hover { border-color: var(--primary-light); background: var(--hover-bg); transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.student-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; font-weight: 600; color: white; }
+.student-avatar.female { background: linear-gradient(135deg, #e8a0bf, #d4729a); }
+.student-avatar.male { background: linear-gradient(135deg, #7eb8d8, #5a9abf); }
+.student-info-text { min-width: 0; }
+.student-info-text .sname { font-size: 13.5px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.student-info-text .snum { font-size: 11px; color: #aaa; margin-top: 1px; }
+.student-empty { grid-column: 1 / -1; text-align: center; padding: 40px 0; color: #bbb; font-size: 14px; }
+
+/* Status badge */
+.status-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11.5px; font-weight: 600; }
 .status-enrolled { background: #e8f8e8; color: #2a7a2a; }
-.status-graduated { background: #f0f0f0; color: #888; }
-.student-photo-cell {
-  width: 40px;
-  height: 40px;
-  background: #f0f0f0;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  color: #ccc;
-}
-.student-no-result {
-  padding: 40px;
-  text-align: center;
-  color: var(--text-light);
-  font-size: 14px;
-}
-.student-no-result span { font-size: 32px; display: block; margin-bottom: 10px; }
 
 /* ===== GALLERY SECTION ===== */
 .gallery-section {
@@ -1423,20 +1323,15 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
   .student-header { padding: 16px 18px; }
   .student-header h3 { font-size: 16px; }
   .student-header p { font-size: 12px; }
-  .student-body { padding: 16px; }
-  .student-search-row {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .student-search-btn {
-    width: 100%;
-    padding: 12px;
-    font-size: 15px;
-  }
-  .student-table th { padding: 8px 10px; font-size: 11.5px; }
-  .student-table td { padding: 10px; font-size: 12.5px; }
-  .student-photo-cell { width: 32px; height: 32px; font-size: 14px; }
-  .student-result { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .grade-tab { font-size: 13px; padding: 11px 0; }
+  .class-chips { padding: 12px 14px; gap: 6px; }
+  .class-chip { padding: 5px 12px; font-size: 12px; }
+  .student-grid-wrap { padding: 14px; }
+  .student-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+  .student-item { padding: 8px 10px; gap: 8px; }
+  .student-avatar { width: 30px; height: 30px; font-size: 13px; }
+  .student-info-text .sname { font-size: 12.5px; }
+  .student-info-text .snum { font-size: 10px; }
 
   /* Gallery */
   .gallery-section { margin-top: 16px; }
@@ -1828,46 +1723,20 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
       </div>
     </div>
 
-    <!-- STUDENT LOOKUP -->
+    <!-- STUDENT DIRECTORY -->
     <div class="student-section" id="studentSection">
       <div class="student-card">
         <div class="student-header">
           <h3>🔍 재학생 확인</h3>
-          <p>천서고등학교 재학생 여부를 확인할 수 있습니다</p>
+          <p>학년과 반을 선택하면 해당 반의 학생 명부를 확인할 수 있습니다</p>
         </div>
         <div class="student-body">
-          <div class="student-search-row">
-            <div class="student-input-group">
-              <label>학년</label>
-              <select id="studentGrade">
-                <option value="">선택</option>
-                <option value="1">1학년</option>
-                <option value="2">2학년</option>
-                <option value="3">3학년</option>
-              </select>
-            </div>
-            <div class="student-input-group">
-              <label>반</label>
-              <select id="studentClass">
-                <option value="">선택</option>
-                <option value="1">1반</option>
-                <option value="2">2반</option>
-                <option value="3">3반</option>
-                <option value="4">4반</option>
-                <option value="5">5반</option>
-                <option value="6">6반</option>
-                <option value="7">7반</option>
-                <option value="8">8반</option>
-              </select>
-            </div>
-            <div class="student-input-group">
-              <label>이름</label>
-              <input type="text" id="studentName" placeholder="학생 이름 입력" onkeydown="if(event.key==='Enter')searchStudent()">
-            </div>
-            <button class="student-search-btn" onclick="searchStudent()">조회</button>
+          <div class="grade-tabs" id="gradeTabs"></div>
+          <div class="class-chips" id="classChips"></div>
+          <div class="student-grid-wrap">
+            <div class="student-grid-info" id="studentGridInfo"></div>
+            <div class="student-grid" id="studentGrid"></div>
           </div>
-
-          <div class="student-result" id="studentResult"></div>
         </div>
       </div>
     </div>
@@ -2112,42 +1981,161 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ===== STUDENT DATABASE =====
-// 여기에 캐챗에 사용할 학생 데이터를 추가/수정하세요!
+// 학생 데이터를 여기서 추가/수정하세요!
 const studentDB = [
-  { grade: 2, class: 3, number: 1, name: '강소은', status: '재학', gender: '여' },
-  { grade: 2, class: 3, number: 2, name: '강민수', status: '재학', gender: '남' },
-  { grade: 2, class: 3, number: 3, name: '고예진', status: '재학', gender: '여' },
-  { grade: 2, class: 3, number: 4, name: '김도윤', status: '재학', gender: '남' },
-  { grade: 2, class: 3, number: 5, name: '김서연', status: '재학', gender: '여' },
-  { grade: 2, class: 3, number: 6, name: '김영훈', status: '재학', gender: '남' },
-  { grade: 2, class: 3, number: 7, name: '김하늘', status: '재학', gender: '여' },
-  { grade: 2, class: 3, number: 8, name: '나현우', status: '재학', gender: '남' },
-  { grade: 2, class: 3, number: 9, name: '박은비', status: '재학', gender: '여' },
-  { grade: 2, class: 3, number: 10, name: '박지훈', status: '재학', gender: '남' },
-  { grade: 2, class: 3, number: 11, name: '서윤아', status: '재학', gender: '여' },
-  { grade: 2, class: 3, number: 12, name: '손태영', status: '재학', gender: '남' },
-  { grade: 2, class: 3, number: 13, name: '신유진', status: '재학', gender: '여' },
-  { grade: 2, class: 3, number: 14, name: '안성민', status: '재학', gender: '남' },
-  { grade: 2, class: 3, number: 15, name: '오수빈', status: '재학', gender: '여' },
-  { grade: 2, class: 3, number: 16, name: '이수현', status: '재학', gender: '여' },
-  { grade: 2, class: 3, number: 17, name: '이준혁', status: '재학', gender: '남' },
-  { grade: 2, class: 3, number: 18, name: '임채원', status: '재학', gender: '여' },
-  { grade: 2, class: 3, number: 19, name: '장우진', status: '재학', gender: '남' },
-  { grade: 2, class: 3, number: 20, name: '전소미', status: '재학', gender: '여' },
-  { grade: 2, class: 3, number: 21, name: '정다은', status: '재학', gender: '여' },
-  { grade: 2, class: 3, number: 22, name: '정시우', status: '재학', gender: '남' },
-  { grade: 2, class: 3, number: 23, name: '조은서', status: '재학', gender: '여' },
-  { grade: 2, class: 3, number: 24, name: '최민재', status: '재학', gender: '남' },
-  { grade: 2, class: 3, number: 25, name: '한소희', status: '재학', gender: '여' },
-  { grade: 1, class: 1, number: 1, name: '김태현', status: '재학', gender: '남' },
-  { grade: 1, class: 1, number: 2, name: '이수아', status: '재학', gender: '여' },
-  { grade: 1, class: 1, number: 3, name: '박민서', status: '재학', gender: '여' },
-  { grade: 1, class: 2, number: 1, name: '최유나', status: '재학', gender: '여' },
-  { grade: 1, class: 2, number: 2, name: '장현우', status: '재학', gender: '남' },
-  { grade: 3, class: 1, number: 1, name: '윤서진', status: '재학', gender: '여' },
-  { grade: 3, class: 1, number: 2, name: '한도현', status: '재학', gender: '남' },
-  { grade: 3, class: 2, number: 1, name: '송예린', status: '재학', gender: '여' },
+  // 1학년 1반
+  {grade:1,class:1,number:1,name:'김태현',status:'재학',gender:'남'},
+  {grade:1,class:1,number:2,name:'이수아',status:'재학',gender:'여'},
+  {grade:1,class:1,number:3,name:'박민서',status:'재학',gender:'여'},
+  {grade:1,class:1,number:4,name:'정윤호',status:'재학',gender:'남'},
+  {grade:1,class:1,number:5,name:'한지우',status:'재학',gender:'여'},
+  {grade:1,class:1,number:6,name:'오동건',status:'재학',gender:'남'},
+  {grade:1,class:1,number:7,name:'백서윤',status:'재학',gender:'여'},
+  {grade:1,class:1,number:8,name:'류현준',status:'재학',gender:'남'},
+  {grade:1,class:1,number:9,name:'문예은',status:'재학',gender:'여'},
+  {grade:1,class:1,number:10,name:'양시현',status:'재학',gender:'남'},
+  // 1학년 2반
+  {grade:1,class:2,number:1,name:'최유나',status:'재학',gender:'여'},
+  {grade:1,class:2,number:2,name:'장현우',status:'재학',gender:'남'},
+  {grade:1,class:2,number:3,name:'임소율',status:'재학',gender:'여'},
+  {grade:1,class:2,number:4,name:'권도영',status:'재학',gender:'남'},
+  {grade:1,class:2,number:5,name:'송하린',status:'재학',gender:'여'},
+  {grade:1,class:2,number:6,name:'홍재민',status:'재학',gender:'남'},
+  {grade:1,class:2,number:7,name:'노은채',status:'재학',gender:'여'},
+  {grade:1,class:2,number:8,name:'유건우',status:'재학',gender:'남'},
+  {grade:1,class:2,number:9,name:'배다인',status:'재학',gender:'여'},
+  {grade:1,class:2,number:10,name:'조승현',status:'재학',gender:'남'},
+  // 2학년 3반 (메인 캐챗 반)
+  {grade:2,class:3,number:1,name:'강소은',status:'재학',gender:'여'},
+  {grade:2,class:3,number:2,name:'강민수',status:'재학',gender:'남'},
+  {grade:2,class:3,number:3,name:'고예진',status:'재학',gender:'여'},
+  {grade:2,class:3,number:4,name:'김도윤',status:'재학',gender:'남'},
+  {grade:2,class:3,number:5,name:'김서연',status:'재학',gender:'여'},
+  {grade:2,class:3,number:6,name:'김영훈',status:'재학',gender:'남'},
+  {grade:2,class:3,number:7,name:'김하늘',status:'재학',gender:'여'},
+  {grade:2,class:3,number:8,name:'나현우',status:'재학',gender:'남'},
+  {grade:2,class:3,number:9,name:'박은비',status:'재학',gender:'여'},
+  {grade:2,class:3,number:10,name:'박지훈',status:'재학',gender:'남'},
+  {grade:2,class:3,number:11,name:'서윤아',status:'재학',gender:'여'},
+  {grade:2,class:3,number:12,name:'손태영',status:'재학',gender:'남'},
+  {grade:2,class:3,number:13,name:'신유진',status:'재학',gender:'여'},
+  {grade:2,class:3,number:14,name:'안성민',status:'재학',gender:'남'},
+  {grade:2,class:3,number:15,name:'오수빈',status:'재학',gender:'여'},
+  {grade:2,class:3,number:16,name:'이수현',status:'재학',gender:'여'},
+  {grade:2,class:3,number:17,name:'이준혁',status:'재학',gender:'남'},
+  {grade:2,class:3,number:18,name:'임채원',status:'재학',gender:'여'},
+  {grade:2,class:3,number:19,name:'장우진',status:'재학',gender:'남'},
+  {grade:2,class:3,number:20,name:'전소미',status:'재학',gender:'여'},
+  {grade:2,class:3,number:21,name:'정다은',status:'재학',gender:'여'},
+  {grade:2,class:3,number:22,name:'정시우',status:'재학',gender:'남'},
+  {grade:2,class:3,number:23,name:'조은서',status:'재학',gender:'여'},
+  {grade:2,class:3,number:24,name:'최민재',status:'재학',gender:'남'},
+  {grade:2,class:3,number:25,name:'한소희',status:'재학',gender:'여'},
+  // 2학년 1반
+  {grade:2,class:1,number:1,name:'권지호',status:'재학',gender:'남'},
+  {grade:2,class:1,number:2,name:'남소현',status:'재학',gender:'여'},
+  {grade:2,class:1,number:3,name:'문재영',status:'재학',gender:'남'},
+  {grade:2,class:1,number:4,name:'배윤서',status:'재학',gender:'여'},
+  {grade:2,class:1,number:5,name:'성하준',status:'재학',gender:'남'},
+  {grade:2,class:1,number:6,name:'윤다현',status:'재학',gender:'여'},
+  {grade:2,class:1,number:7,name:'이동현',status:'재학',gender:'남'},
+  {grade:2,class:1,number:8,name:'차미경',status:'재학',gender:'여'},
+  // 2학년 2반
+  {grade:2,class:2,number:1,name:'곽서준',status:'재학',gender:'남'},
+  {grade:2,class:2,number:2,name:'노하은',status:'재학',gender:'여'},
+  {grade:2,class:2,number:3,name:'민재원',status:'재학',gender:'남'},
+  {grade:2,class:2,number:4,name:'서가영',status:'재학',gender:'여'},
+  {grade:2,class:2,number:5,name:'엄태민',status:'재학',gender:'남'},
+  {grade:2,class:2,number:6,name:'유지안',status:'재학',gender:'여'},
+  {grade:2,class:2,number:7,name:'주현성',status:'재학',gender:'남'},
+  {grade:2,class:2,number:8,name:'표예나',status:'재학',gender:'여'},
+  // 3학년 1반
+  {grade:3,class:1,number:1,name:'윤서진',status:'재학',gender:'여'},
+  {grade:3,class:1,number:2,name:'한도현',status:'재학',gender:'남'},
+  {grade:3,class:1,number:3,name:'구예림',status:'재학',gender:'여'},
+  {grade:3,class:1,number:4,name:'방승우',status:'재학',gender:'남'},
+  {grade:3,class:1,number:5,name:'석다영',status:'재학',gender:'여'},
+  {grade:3,class:1,number:6,name:'탁민혁',status:'재학',gender:'남'},
+  {grade:3,class:1,number:7,name:'피수연',status:'재학',gender:'여'},
+  {grade:3,class:1,number:8,name:'하승재',status:'재학',gender:'남'},
+  // 3학년 2반
+  {grade:3,class:2,number:1,name:'송예린',status:'재학',gender:'여'},
+  {grade:3,class:2,number:2,name:'강준서',status:'재학',gender:'남'},
+  {grade:3,class:2,number:3,name:'도윤희',status:'재학',gender:'여'},
+  {grade:3,class:2,number:4,name:'라태준',status:'재학',gender:'남'},
+  {grade:3,class:2,number:5,name:'마지원',status:'재학',gender:'여'},
+  {grade:3,class:2,number:6,name:'사현우',status:'재학',gender:'남'},
+  {grade:3,class:2,number:7,name:'아소미',status:'재학',gender:'여'},
+  {grade:3,class:2,number:8,name:'차동민',status:'재학',gender:'남'},
 ];
+
+// ===== STUDENT DIRECTORY RENDERER =====
+let currentGrade = 2;
+let currentClass = 3;
+
+function getGrades() { return [...new Set(studentDB.map(s => s.grade))].sort(); }
+function getClasses(grade) { return [...new Set(studentDB.filter(s => s.grade === grade).map(s => s.class))].sort(); }
+function getStudents(grade, cls) { return studentDB.filter(s => s.grade === grade && s.class === cls).sort((a,b) => a.number - b.number); }
+
+function renderGradeTabs() {
+  const grades = getGrades();
+  document.getElementById('gradeTabs').innerHTML = grades.map(g => {
+    const count = studentDB.filter(s => s.grade === g).length;
+    return `<button class="grade-tab${g===currentGrade?' active':''}" onclick="selectGrade(${g})">${g}학년<span class="grade-count">(${count}명)</span></button>`;
+  }).join('');
+}
+
+function renderClassChips() {
+  const classes = getClasses(currentGrade);
+  if (!classes.includes(currentClass)) currentClass = classes[0];
+  document.getElementById('classChips').innerHTML = classes.map(c => {
+    const count = getStudents(currentGrade, c).length;
+    return `<button class="class-chip${c===currentClass?' active':''}" onclick="selectClass(${c})">${c}반<span class="chip-count">(${count})</span></button>`;
+  }).join('');
+}
+
+function renderStudentGrid() {
+  const students = getStudents(currentGrade, currentClass);
+  const info = document.getElementById('studentGridInfo');
+  const grid = document.getElementById('studentGrid');
+
+  info.innerHTML = `<strong>${currentGrade}학년 ${currentClass}반</strong><span>총 ${students.length}명</span>`;
+
+  if (students.length === 0) {
+    grid.innerHTML = '<div class="student-empty">등록된 학생이 없습니다.</div>';
+    return;
+  }
+
+  grid.innerHTML = students.map(s => {
+    const initial = s.name.charAt(0);
+    const avatarClass = s.gender === '여' ? 'female' : 'male';
+    return `<div class="student-item">
+      <div class="student-avatar ${avatarClass}">${initial}</div>
+      <div class="student-info-text">
+        <div class="sname">${s.name}</div>
+        <div class="snum">${s.number}번</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function selectGrade(g) {
+  currentGrade = g;
+  renderGradeTabs();
+  renderClassChips();
+  renderStudentGrid();
+}
+
+function selectClass(c) {
+  currentClass = c;
+  renderClassChips();
+  renderStudentGrid();
+}
+
+// Initial render
+renderGradeTabs();
+renderClassChips();
+renderStudentGrid();
 
 // ===== BANNER =====
 let currentBanner = 0;
@@ -2270,49 +2258,6 @@ function changeMonth(dir) {
 }
 
 renderCalendar();
-
-// ===== STUDENT SEARCH =====
-function searchStudent() {
-  const grade = document.getElementById('studentGrade').value;
-  const cls = document.getElementById('studentClass').value;
-  const name = document.getElementById('studentName').value.trim();
-  const resultDiv = document.getElementById('studentResult');
-
-  if (!name && !grade && !cls) {
-    showToast('검색 조건을 입력해주세요.');
-    return;
-  }
-
-  let results = studentDB.filter(s => {
-    if (grade && s.grade !== parseInt(grade)) return false;
-    if (cls && s.class !== parseInt(cls)) return false;
-    if (name && !s.name.includes(name)) return false;
-    return true;
-  });
-
-  if (results.length > 0) {
-    let html = `<div class="student-result-header">✅ 검색 결과 (${results.length}명)</div>`;
-    html += '<table class="student-table">';
-    html += '<thead><tr><th></th><th>학년</th><th>반</th><th>번호</th><th>이름</th><th>상태</th></tr></thead>';
-    html += '<tbody>';
-    results.forEach(s => {
-      html += `<tr>
-        <td><div class="student-photo-cell">${s.gender === '여' ? '👩' : '👨'}</div></td>
-        <td>${s.grade}학년</td>
-        <td>${s.class}반</td>
-        <td>${s.number}번</td>
-        <td><strong>${s.name}</strong></td>
-        <td><span class="status-badge ${s.status === '재학' ? 'status-enrolled' : 'status-graduated'}">${s.status}</span></td>
-      </tr>`;
-    });
-    html += '</tbody></table>';
-    resultDiv.innerHTML = html;
-  } else {
-    resultDiv.innerHTML = `<div class="student-no-result"><span>😔</span>검색 결과가 없습니다.<br><small style="color:#bbb">학년, 반, 이름을 다시 확인해주세요.</small></div>`;
-  }
-
-  resultDiv.classList.add('show');
-}
 
 function goHome() {
   closeSubpage();
