@@ -1504,6 +1504,44 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
   .info-stat .number { font-size: 24px; }
   .tab-btn { padding: 10px 10px; font-size: 11.5px; }
 }
+
+/* ===== SVG ICON SYSTEM =====
+   이미지로 교체: <span class="site-icon"><img src="icon.png" alt=""></span>
+*/
+.site-icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.site-icon svg { width: 100%; height: 100%; }
+.site-icon img { width: 100%; height: 100%; object-fit: contain; }
+
+/* ===== SUBPAGE OVERLAY ===== */
+.subpage-overlay { display: none; position: fixed; inset: 0; background: var(--bg); z-index: 150; overflow-y: auto; }
+.subpage-overlay.show { display: block; }
+.subpage-top { background: var(--primary); color: white; padding: 14px 0; }
+.subpage-top .container { display: flex; align-items: center; justify-content: space-between; }
+.subpage-top h2 { font-size: 18px; font-weight: 700; }
+.subpage-back { background: none; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 6px 16px; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: 13px; transition: all 0.2s; }
+.subpage-back:hover { background: rgba(255,255,255,0.1); }
+.subpage-breadcrumb { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 0; font-size: 12.5px; color: var(--text-light); }
+.subpage-breadcrumb span { cursor: pointer; }
+.subpage-breadcrumb span:hover { color: var(--primary); }
+.subpage-body { padding: 32px 0 60px; }
+.subpage-body .container { max-width: 900px; }
+.subpage-card { background: var(--white); border: 1px solid #eee; border-radius: 8px; padding: 32px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+.subpage-card h3 { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 20px; padding-bottom: 14px; border-bottom: 2px solid var(--primary); }
+.subpage-card p { margin-bottom: 14px; line-height: 1.9; font-size: 14px; }
+.subpage-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+.subpage-card table th { background: var(--primary); color: white; padding: 10px 14px; font-size: 13px; text-align: left; }
+.subpage-card table td { padding: 10px 14px; font-size: 13px; border-bottom: 1px solid #eee; }
+.subpage-card table tr:hover td { background: var(--hover-bg); }
+.subpage-card ul, .subpage-card ol { margin: 12px 0 12px 20px; font-size: 14px; line-height: 2; }
+.subpage-card .info-box { background: #f8fafc; border-left: 4px solid var(--primary); padding: 16px 20px; margin: 16px 0; border-radius: 0 6px 6px 0; font-size: 13.5px; }
+.subpage-card .warn-box { background: #fef8f0; border-left: 4px solid var(--accent); padding: 16px 20px; margin: 16px 0; border-radius: 0 6px 6px 0; font-size: 13.5px; }
+.search-results-list { list-style: none; }
+.search-results-list li { padding: 16px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: padding-left 0.15s; }
+.search-results-list li:hover { padding-left: 6px; }
+.search-results-list .sr-title { font-size: 15px; font-weight: 600; color: var(--primary); margin-bottom: 4px; }
+.search-results-list .sr-category { font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 2px; }
+@media (max-width: 768px) { .subpage-card { padding: 20px; } .subpage-card h3 { font-size: 17px; } }
+
 </style>
 </head>
 <body>
@@ -1515,16 +1553,16 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
     <span class="divider">|</span>
     <a href="#" onclick="openSitemap(); return false;">사이트맵</a>
     <span class="divider">|</span>
-    <a href="#" onclick="showToast('English 페이지는 준비 중입니다.'); return false;">English</a>
+    <a href="#" onclick="showToast('English page is under construction.'); return false;">English</a>
     <span class="divider">|</span>
-    <a href="#" onclick="showToast('글씨 크기가 조절되었습니다.'); return false;">가 ᄀ</a>
+    <a href="#" onclick="changeFontSize(); return false;">가 ᄀ</a>
   </div>
 </div>
 
 <!-- HEADER -->
 <header class="header">
   <div class="container">
-    <div class="header-left" onclick="location.reload()">
+    <div class="header-left" onclick="goHome()">
       <div class="school-logo" id="schoolLogo">
         <!-- 이미지를 넣으려면 아래 img 태그의 src를 변경하세요 -->
         <!-- <img src="logo.png" alt="천서고 로고"> -->
@@ -1541,7 +1579,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
         <button onclick="siteSearchAction()">🔍</button>
       </div>
       <div class="header-icons">
-        <button class="icon-btn" title="홈" onclick="location.reload()">🏠</button>
+        <button class="icon-btn" title="홈" onclick="goHome()">🏠</button>
         <button class="icon-btn" title="사이트맵" onclick="openSitemap()">☰</button>
       </div>
       <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()">
@@ -1842,28 +1880,28 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
           <span class="more-btn" onclick="openPage('학교앨범')">더보기 ▸</span>
         </div>
         <div class="gallery-grid">
-          <div class="gallery-item">
+          <div class="gallery-item" onclick="openPage('학교앨범')">
             <div class="gallery-placeholder">
               <span>🏫</span>
               <small>학교 전경</small>
             </div>
             <div class="gallery-overlay">학교 전경</div>
           </div>
-          <div class="gallery-item">
+          <div class="gallery-item" onclick="openPage('학교앨범')">
             <div class="gallery-placeholder">
               <span>🎓</span>
               <small>입학식</small>
             </div>
             <div class="gallery-overlay">2026 입학식</div>
           </div>
-          <div class="gallery-item">
+          <div class="gallery-item" onclick="openPage('학교앨범')">
             <div class="gallery-placeholder">
               <span>🏃</span>
               <small>체육대회</small>
             </div>
             <div class="gallery-overlay">체육대회</div>
           </div>
-          <div class="gallery-item">
+          <div class="gallery-item" onclick="openPage('학교앨범')">
             <div class="gallery-placeholder">
               <span>🎭</span>
               <small>천서제</small>
@@ -1880,19 +1918,19 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 <section class="info-bar">
   <div class="container">
     <div class="info-grid">
-      <div class="info-stat" onclick="showToast('2026학년도 기준 재학생 현황입니다.')">
+      <div class="info-stat" onclick="openPage('학교정보공시')">
         <div class="number" id="statStudents">0</div>
         <div class="label">재학생 수</div>
       </div>
-      <div class="info-stat" onclick="showToast('전임교원 기준입니다.')">
+      <div class="info-stat" onclick="openPage('교직원소개')">
         <div class="number" id="statTeachers">0</div>
         <div class="label">교직원 수</div>
       </div>
-      <div class="info-stat" onclick="showToast('1973년 개교')">
+      <div class="info-stat" onclick="openPage('학교연혁')">
         <div class="number" id="statHistory">0</div>
         <div class="label">년 역사</div>
       </div>
-      <div class="info-stat" onclick="showToast('2025년 졸업생 포함')">
+      <div class="info-stat" onclick="openPage('학교연혁')">
         <div class="number" id="statGraduates">0</div>
         <div class="label">졸업생 수</div>
       </div>
@@ -1919,9 +1957,9 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
     <div class="footer-bottom">
       <div class="footer-copyright">Copyright © 2026 천서고등학교. All Rights Reserved.</div>
       <div class="footer-badges">
-        <span class="footer-badge" onclick="showToast('교육부 홈페이지로 이동합니다. (데모)')">교육부</span>
-        <span class="footer-badge" onclick="showToast('서울시교육청 홈페이지로 이동합니다. (데모)')">서울시교육청</span>
-        <span class="footer-badge" onclick="showToast('학교알리미 홈페이지로 이동합니다. (데모)')">학교알리미</span>
+        <a class="footer-badge" href="https://www.moe.go.kr" target="_blank" rel="noopener">교육부</a>
+        <a class="footer-badge" href="https://www.sen.go.kr" target="_blank" rel="noopener">서울시교육청</a>
+        <a class="footer-badge" href="https://www.schoolinfo.go.kr" target="_blank" rel="noopener">학교알리미</a>
       </div>
     </div>
   </div>
@@ -1930,7 +1968,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 <!-- MOBILE BOTTOM NAV -->
 <div class="mobile-bottom-nav">
   <div class="mobile-bottom-nav-inner">
-    <button class="mobile-bottom-item" onclick="location.reload()">
+    <button class="mobile-bottom-item" onclick="goHome()">
       <span class="mb-icon">🏠</span>
       <span class="mb-label">홈</span>
     </button>
@@ -1995,9 +2033,9 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
         <button class="login-submit" onclick="attemptLogin()">로그인</button>
       </div>
       <div class="login-options">
-        <a onclick="showToast('아이디 찾기 페이지는 준비 중입니다.')">아이디 찾기</a>
-        <a onclick="showToast('비밀번호 찾기 페이지는 준비 중입니다.')">비밀번호 찾기</a>
-        <a onclick="showToast('회원가입 페이지는 준비 중입니다.')">회원가입</a>
+        <a onclick="closeModal('loginModal');openPage('아이디 찾기')">아이디 찾기</a>
+        <a onclick="closeModal('loginModal');openPage('비밀번호 찾기')">비밀번호 찾기</a>
+        <a onclick="closeModal('loginModal');openPage('회원가입')">회원가입</a>
       </div>
     </div>
   </div>
@@ -2276,12 +2314,26 @@ function searchStudent() {
   resultDiv.classList.add('show');
 }
 
+function goHome() {
+  closeSubpage();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
 function scrollToStudent() {
-  document.getElementById('studentSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  closeSubpage();
+  setTimeout(() => {
+    document.getElementById('studentSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 100);
 }
 
 // ===== NOTICE MODAL =====
 function openNotice(title, date, author, content) {
+  // Can be called with just title (from subpage) or with all 4 params (from inline)
+  if (!date) {
+    const n = noticeData.find(x => x.title === title);
+    if (n) { date = n.date; author = n.author; content = n.content; }
+    else { showToast('해당 게시글을 찾을 수 없습니다.'); return; }
+  }
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalDate').textContent = '📅 ' + date;
   document.getElementById('modalAuthor').textContent = '✏️ ' + author;
@@ -2357,16 +2409,111 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove('show'), 2500);
 }
 
-// ===== PAGE NAVIGATION =====
-function openPage(pageName) {
-  showToast(`"${pageName}" 페이지로 이동합니다. (데모)`);
+// ===== PAGE DATA =====
+const pageData = {
+  '인사말': {cat:'학교소개', html:'<h3>교장 인사말</h3><p>천서고등학교 홈페이지를 방문해 주신 여러분을 진심으로 환영합니다.</p><p>본교는 1973년 개교 이래 "진리·창조·봉사"의 교훈 아래, 미래 사회를 이끌어갈 창의적이고 바른 인성을 갖춘 인재를 양성하기 위해 노력해 왔습니다.</p><p>학생 한 명 한 명의 꿈과 재능을 존중하며, 따뜻한 교육 공동체를 만들어가겠습니다.</p><div class="info-box">교장 홍길동 올림</div>'},
+  '학교연혁': {cat:'학교소개', html:'<h3>학교연혁</h3><table><tr><th>연도</th><th>내용</th></tr><tr><td>1973</td><td>천서고등학교 개교 (6학급)</td></tr><tr><td>1980</td><td>신관 증축 (18학급)</td></tr><tr><td>1995</td><td>도서관 및 체육관 신축</td></tr><tr><td>2005</td><td>과학관 리모델링</td></tr><tr><td>2015</td><td>창의융합교육관 개관</td></tr><tr><td>2020</td><td>스마트 교실 구축</td></tr><tr><td>2025</td><td>개교 52주년 기념식</td></tr></table>'},
+  '학교상징': {cat:'학교소개', html:'<h3>학교상징</h3><p><strong>교훈:</strong> 진리 · 창조 · 봉사</p><p><strong>교화:</strong> 목련 — 고귀한 품성과 아름다운 꿈을 상징합니다.</p><p><strong>교목:</strong> 은행나무 — 끈기와 인내, 풍요를 상징합니다.</p><p><strong>교색:</strong> 네이비 블루 — 깊은 지성과 신뢰를 나타냅니다.</p><div class="info-box">학교 마크는 \'天(하늘 천)\'자를 형상화하여 높은 이상을 향해 나아가는 천서인의 정신을 담고 있습니다.</div>'},
+  '교직원소개': {cat:'학교소개', html:'<h3>교직원 현황</h3><table><tr><th>구분</th><th>성명</th><th>담당</th></tr><tr><td>교장</td><td>홍길동</td><td>학교 총괄</td></tr><tr><td>교감</td><td>김철수</td><td>교무 총괄</td></tr><tr><td>교무기획부장</td><td>이영희</td><td>교무기획</td></tr><tr><td>생활인권부장</td><td>박정훈</td><td>생활지도</td></tr><tr><td>진로교육부장</td><td>최수진</td><td>진로상담</td></tr><tr><td>상담교사</td><td>정미라</td><td>Wee클래스</td></tr></table><p>전체 교직원 수: 68명 (교원 52명, 행정직 16명)</p>'},
+  '오시는길': {cat:'학교소개', html:'<h3>오시는 길</h3><div class="info-box"><strong>주소:</strong> 서울특별시 강남구 천서로 123<br><strong>교무실:</strong> 02-1234-5678<br><strong>행정실:</strong> 02-1234-5679</div><p><strong>지하철:</strong> 2호선 천서역 3번 출구에서 도보 5분</p><p><strong>버스:</strong> 간선 140, 144, 360 / 지선 4412 — 천서고 앞 하차</p><p><strong>자가용:</strong> 학교 정문 우측 주차장 이용 (방문 시 행정실 문의)</p>'},
+  '학교운영위원회': {cat:'학교소개', html:'<h3>학교운영위원회</h3><p>학교운영위원회는 학교 운영에 관한 주요 사항을 심의하는 기구입니다.</p><table><tr><th>구분</th><th>성명</th><th>비고</th></tr><tr><td>위원장</td><td>박지영</td><td>학부모위원</td></tr><tr><td>부위원장</td><td>이정수</td><td>교원위원</td></tr><tr><td>위원</td><td>김현아 외 6명</td><td>학부모·지역위원</td></tr></table><p>2026학년도 제1차 정기회의: 2026년 3월 28일</p>'},
+  '학교규칙': {cat:'학교생활', html:'<h3>학교규칙</h3><p>천서고등학교 학칙의 주요 내용입니다.</p><ol><li><strong>등교 시간:</strong> 오전 8시 20분까지</li><li><strong>복장:</strong> 교복 착용 의무</li><li><strong>휴대폰:</strong> 등교 시 담임교사에게 제출, 하교 시 반환</li><li><strong>외출·조퇴:</strong> 담임교사 허가 후 행정실 경유</li><li><strong>학교폭력:</strong> 무관용 원칙 적용</li></ol><div class="warn-box">학교규칙 전문은 교무실 또는 학교 행정실에서 열람 가능합니다.</div>'},
+  '급식안내': {cat:'학교생활', html:'<h3>급식안내</h3><p>천서고등학교는 교육청 인증 급식 시설을 운영하고 있습니다.</p><div class="info-box"><strong>급식 시간:</strong><br>1학년 — 11:50~12:20<br>2학년 — 12:20~12:50<br>3학년 — 12:50~13:20</div><p><strong>이번 주 식단 (예시):</strong></p><table><tr><th>요일</th><th>메뉴</th></tr><tr><td>월</td><td>쌀밥, 된장찌개, 제육볶음, 시금치나물, 배추김치, 요거트</td></tr><tr><td>화</td><td>잡곡밥, 미역국, 생선구이, 감자조림, 깍두기, 사과</td></tr><tr><td>수</td><td>카레라이스, 유부장국, 치킨너겟, 콘샐러드, 배추김치</td></tr><tr><td>목</td><td>비빔밥, 계란국, 만두, 오이무침, 깍두기, 주스</td></tr><tr><td>금</td><td>김치볶음밥, 떡국, 탕수육, 숙주나물, 배추김치, 귤</td></tr></table>'},
+  'Wee클래스': {cat:'학교생활', html:'<h3>Wee클래스 상담실</h3><p>천서고 Wee클래스는 학생들의 심리·정서 지원을 위한 전문 상담 공간입니다.</p><div class="info-box"><strong>상담교사:</strong> 정미라 선생님<br><strong>위치:</strong> 본관 2층 상담실<br><strong>상담 시간:</strong> 월~금 09:00~16:00<br><strong>예약:</strong> 직접 방문 또는 담임교사를 통해 신청</div><p><strong>운영 프로그램:</strong></p><ul><li>개인상담 (학업, 교우관계, 진로, 가정 등)</li><li>집단상담 (자존감 향상, 분노조절, 또래관계)</li><li>위기상담 (학교폭력, 자해·자살 예방)</li><li>학부모 상담</li></ul><div class="warn-box">모든 상담 내용은 비밀이 보장됩니다. 어떤 고민이든 편하게 찾아와 주세요.</div>'},
+  '교육목표': {cat:'교육과정', html:'<h3>교육목표</h3><p><strong>교훈:</strong> 진리 · 창조 · 봉사</p><p><strong>교육비전:</strong> 미래를 여는 창의융합 인재 육성</p><ul><li><strong>자주인:</strong> 스스로 탐구하고 학습하는 자기주도적 학습자</li><li><strong>창의인:</strong> 새로운 가치를 창출하는 융합적 사고력을 갖춘 인재</li><li><strong>도덕인:</strong> 바른 인성으로 공동체에 기여하는 시민</li><li><strong>건강인:</strong> 심신이 건강하고 문화적 소양을 갖춘 인재</li></ul>'},
+  '교육과정 편성': {cat:'교육과정', html:'<h3>교육과정 편성</h3><table><tr><th>학년</th><th>공통 과목</th><th>선택 과목</th></tr><tr><td>1학년</td><td>국어, 수학, 영어, 한국사, 통합사회, 통합과학</td><td>예술(음악/미술), 체육, 기술가정</td></tr><tr><td>2학년</td><td>국어, 수학, 영어</td><td>문학, 미적분, 화학I, 생명과학I, 경제, 정치와법 등</td></tr><tr><td>3학년</td><td>국어, 수학, 영어</td><td>심화 선택 과목 (진로별 맞춤)</td></tr></table><div class="info-box">2026학년도부터 고교학점제가 전면 시행됩니다.</div>'},
+  '방과후학교': {cat:'교육과정', html:'<h3>방과후학교</h3><table><tr><th>분야</th><th>프로그램</th><th>시간</th></tr><tr><td>교과</td><td>수학 심화반, 영어 독해반, 국어 논술반</td><td>월·수 16:00~17:30</td></tr><tr><td>예술</td><td>밴드부, 미술 창작반, 사진반</td><td>화·목 16:00~17:30</td></tr><tr><td>체육</td><td>농구, 배드민턴, 축구</td><td>금 16:00~18:00</td></tr><tr><td>코딩</td><td>파이썬 기초, 앱 개발, AI 입문</td><td>월·금 16:00~17:30</td></tr></table><div class="info-box">수강 신청은 매 학기 초 학교 홈페이지를 통해 진행됩니다.</div>'},
+  '자유학기제': {cat:'교육과정', html:'<h3>자유학기제</h3><p>천서고등학교는 1학년 1학기에 자유학기제를 운영합니다.</p><ul><li><strong>주제선택:</strong> 미디어리터러시, 환경과 생태, 코딩의 세계</li><li><strong>예술·체육:</strong> 뮤지컬, 캘리그라피, 프리스비</li><li><strong>동아리:</strong> 과학탐구, 영자신문, 토론반</li><li><strong>진로탐색:</strong> 직업인 특강, 진로검사, 직업체험</li></ul>'},
+  '공지사항': {cat:'알림마당', html:'NOTICE_LIST_PLACEHOLDER'},
+  '가정통신문': {cat:'알림마당', html:'LETTER_LIST_PLACEHOLDER'},
+  '학교행사': {cat:'알림마당', html:'EVENT_LIST_PLACEHOLDER'},
+  '보도자료': {cat:'알림마당', html:'<h3>보도자료</h3><table><tr><th>번호</th><th>제목</th><th>날짜</th></tr><tr><td>2</td><td>천서고, 전국 과학올림피아드 금상 수상</td><td>2026.02.15</td></tr><tr><td>1</td><td>천서고 AI 동아리, 교육부 장관상 수상</td><td>2025.12.20</td></tr></table>'},
+  '학교앨범': {cat:'참여마당', html:'<h3>학교앨범</h3><p>천서고등학교의 다양한 활동 사진입니다.</p><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px"><div style="aspect-ratio:4/3;background:#f0f0f0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#999">입학식</div><div style="aspect-ratio:4/3;background:#f0f0f0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#999">학교 전경</div><div style="aspect-ratio:4/3;background:#f0f0f0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#999">체육대회</div><div style="aspect-ratio:4/3;background:#f0f0f0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#999">천서제</div><div style="aspect-ratio:4/3;background:#f0f0f0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#999">진로체험</div><div style="aspect-ratio:4/3;background:#f0f0f0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#999">졸업식</div></div><div class="info-box">사진을 클릭하면 원본 크기로 볼 수 있습니다.</div>'},
+  '자유게시판': {cat:'참여마당', html:'<h3>자유게시판</h3><table><tr><th>번호</th><th>제목</th><th>작성자</th><th>날짜</th></tr><tr><td>5</td><td>동아리 박람회 후기</td><td>이**</td><td>2026.03.14</td></tr><tr><td>4</td><td>학교 앞 카페 추천</td><td>김**</td><td>2026.03.12</td></tr><tr><td>3</td><td>체육대회 반 티 디자인 의견</td><td>박**</td><td>2026.03.10</td></tr><tr><td>2</td><td>도서관 이용 시간 문의</td><td>최**</td><td>2026.03.08</td></tr><tr><td>1</td><td>새 학기 인사드려요!</td><td>정**</td><td>2026.03.02</td></tr></table><div class="info-box">게시글 작성은 로그인 후 가능합니다.</div>'},
+  '건의사항': {cat:'참여마당', html:'<h3>건의사항</h3><table><tr><th>번호</th><th>제목</th><th>상태</th><th>날짜</th></tr><tr><td>3</td><td>급식 메뉴 다양화 요청</td><td style="color:#2a7a2a">답변완료</td><td>2026.03.10</td></tr><tr><td>2</td><td>화장실 환풍기 수리 요청</td><td style="color:#2a7a2a">답변완료</td><td>2026.03.06</td></tr><tr><td>1</td><td>도서관 좌석 예약 시스템 건의</td><td style="color:#d4a843">검토중</td><td>2026.03.03</td></tr></table><div class="info-box">건의사항 작성은 로그인 후 가능합니다.</div>'},
+  '설문조사': {cat:'참여마당', html:'<h3>설문조사</h3><table><tr><th>번호</th><th>제목</th><th>기간</th><th>상태</th></tr><tr><td>2</td><td>방과후학교 수요조사</td><td>3/10~3/20</td><td style="color:#2a7a2a">진행중</td></tr><tr><td>1</td><td>급식 만족도 조사</td><td>2/20~2/28</td><td style="color:#999">마감</td></tr></table><div class="info-box">설문 참여는 로그인 후 가능합니다.</div>'},
+  '학교정보공시': {cat:'정보공개', html:'<h3>학교정보공시</h3><table><tr><th>항목</th><th>내용</th></tr><tr><td>학교 현황</td><td>24학급 / 847명</td></tr><tr><td>교원 현황</td><td>52명 (남 18, 여 34)</td></tr><tr><td>졸업생 진로</td><td>대학진학 89.2%, 취업 3.5%, 기타 7.3%</td></tr><tr><td>교육활동</td><td>방과후학교, 동아리 28개, Wee클래스</td></tr></table><div class="info-box">자세한 내용은 <a href="https://www.schoolinfo.go.kr" target="_blank" style="color:var(--primary-light)">학교알리미</a>에서 확인 가능합니다.</div>'},
+  '업무추진비': {cat:'정보공개', html:'<h3>업무추진비 공개</h3><table><tr><th>월</th><th>집행액</th><th>주요 용도</th></tr><tr><td>2026년 1월</td><td>580,000원</td><td>학교 행사 업무</td></tr><tr><td>2026년 2월</td><td>420,000원</td><td>신학기 준비</td></tr></table><div class="info-box">업무추진비는 매월 학교 홈페이지에 공개됩니다.</div>'},
+  '학교발전기금': {cat:'정보공개', html:'<h3>학교발전기금</h3><table><tr><th>구분</th><th>금액</th></tr><tr><td>전년도 이월</td><td>12,500,000원</td></tr><tr><td>올해 조성</td><td>8,200,000원</td></tr><tr><td>올해 집행</td><td>6,800,000원</td></tr><tr><td>잔액</td><td>13,900,000원</td></tr></table>'},
+  '학교생활 안내': {cat:'학교생활', html:'<h3>학교생활 안내</h3><p><strong>일과 운영:</strong></p><table><tr><th>시간</th><th>내용</th></tr><tr><td>08:20</td><td>등교</td></tr><tr><td>08:30~08:50</td><td>조회 / 아침활동</td></tr><tr><td>09:00~12:10</td><td>1~4교시</td></tr><tr><td>12:10~13:20</td><td>점심시간</td></tr><tr><td>13:20~16:00</td><td>5~7교시</td></tr><tr><td>16:00~16:10</td><td>종례</td></tr></table>'},
+  '학사일정': {cat:'학교생활', html:'<h3>2026학년도 학사일정</h3><table><tr><th>월</th><th>일정</th></tr><tr><td>3월</td><td>개학식(2일), 학생회 선거(8일), 학폭예방교육(20일), 학부모총회(25일)</td></tr><tr><td>4월</td><td>중간고사(21~24일), 진로체험의 날(25일)</td></tr><tr><td>5월</td><td>어린이날(5일), 체육대회(10일)</td></tr><tr><td>6월</td><td>현충일(6일), 기말고사(23~26일)</td></tr><tr><td>7월</td><td>여름방학식(18일)</td></tr><tr><td>9월</td><td>천서제(26~27일)</td></tr><tr><td>11월</td><td>수능(19일)</td></tr><tr><td>12월</td><td>겨울방학식(24일)</td></tr><tr><td>2월</td><td>졸업식(7일)</td></tr></table>'},
+  '아이디 찾기': {cat:'회원', html:'<h3>아이디 찾기</h3><p>등록된 이름과 이메일을 입력하시면 아이디를 찾을 수 있습니다.</p><div class="info-box">학생 계정은 학번이 아이디입니다. (예: 20301 = 2학년 3반 01번)<br>교직원 계정 분실 시 행정실로 문의해 주세요.</div>'},
+  '비밀번호 찾기': {cat:'회원', html:'<h3>비밀번호 찾기</h3><p>등록된 아이디와 이메일을 입력하시면 임시 비밀번호가 발송됩니다.</p><div class="info-box">이메일을 등록하지 않으신 경우 행정실로 문의해 주세요.</div>'},
+  '회원가입': {cat:'회원', html:'<h3>회원가입 안내</h3><ul><li><strong>재학생:</strong> 입학 시 자동 생성 (아이디: 학번)</li><li><strong>학부모:</strong> 자녀 학번 기반 신청 (행정실 방문)</li><li><strong>교직원:</strong> 발령 시 행정실에서 발급</li></ul><div class="info-box">외부인 회원가입은 지원되지 않습니다.</div>'},
+};
+
+// ===== SUBPAGE SYSTEM =====
+function openPage(name) {
+  const data = pageData[name];
+  if (!data) { showToast('"' + name + '" 페이지 준비 중입니다.'); return; }
+  closeModal('loginModal');
+  document.getElementById('subpageTitle').textContent = name;
+  document.getElementById('subpageCat').textContent = data.cat;
+  document.getElementById('subpageName').textContent = name;
+  let h = data.html;
+  // Dynamic notice lists
+  if (h === 'NOTICE_LIST_PLACEHOLDER') h = '<h3>공지사항</h3>' + buildNoticeTable(noticeData.filter(n=>n.cat==='공지사항'));
+  if (h === 'LETTER_LIST_PLACEHOLDER') h = '<h3>가정통신문</h3>' + buildNoticeTable(noticeData.filter(n=>n.cat==='가정통신문'));
+  if (h === 'EVENT_LIST_PLACEHOLDER') h = '<h3>학교행사</h3>' + buildNoticeTable(noticeData.filter(n=>n.cat==='학교행사'));
+  document.getElementById('subpageContent').innerHTML = h;
+  document.getElementById('subpageOverlay').classList.add('show');
+  document.getElementById('subpageOverlay').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
 }
+function buildNoticeTable(arr) {
+  return '<table><tr><th>번호</th><th>제목</th><th>작성자</th><th>날짜</th></tr>' +
+    arr.map((n,i) => '<tr style="cursor:pointer" onclick="closeSubpage();setTimeout(function(){openNotice(\'' + n.title.replace(/'/g,"\\'") + '\')},150)"><td>' + (arr.length-i) + '</td><td>' + n.title + '</td><td>' + n.author + '</td><td>' + n.date + '</td></tr>').join('') + '</table>';
+}
+function closeSubpage() {
+  document.getElementById('subpageOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// Notice data for search
+const noticeData = [
+  {title:'2026학년도 1학기 중간고사 시간표 안내',date:'2026.03.15',author:'교무기획부',cat:'공지사항',content:'2026학년도 1학기 중간고사 시간표를 다음과 같이 안내드립니다.\n\n시험 기간: 2026년 4월 21일(화) ~ 4월 24일(금)'},
+  {title:'학교폭력 예방교육 실시 안내',date:'2026.03.12',author:'생활인권부',cat:'공지사항',content:'학교폭력 예방 및 대책에 관한 법률에 의거하여 학교폭력 예방교육을 실시합니다.'},
+  {title:'2026학년도 학생회 임원 선거 결과',date:'2026.03.10',author:'학생자치부',cat:'공지사항',content:'2026학년도 학생회 임원 선거가 3월 8일에 실시되었습니다.'},
+  {title:'3월 학교 급식 식단표',date:'2026.03.01',author:'영양교육부',cat:'공지사항',content:'3월 학교 급식 식단표를 안내드립니다.'},
+  {title:'개인정보 처리방침 개정 안내',date:'2026.02.28',author:'행정실',cat:'공지사항',content:'개인정보 보호법 개정에 따라 변경되었습니다.'},
+  {title:'학부모 총회 참석 안내',date:'2026.03.14',author:'교무기획부',cat:'가정통신문',content:'2026학년도 학부모 총회를 개최합니다.'},
+  {title:'건강검진 실시 안내',date:'2026.03.08',author:'보건실',cat:'가정통신문',content:'학교보건법에 의거하여 건강검진을 실시합니다.'},
+  {title:'교복 하복 주문 안내',date:'2026.03.05',author:'행정실',cat:'가정통신문',content:'하복 교복 주문을 받습니다.'},
+  {title:'교내 체육대회 (5/10)',date:'2026.04.15',author:'체육교육부',cat:'학교행사',content:'2026학년도 교내 체육대회를 개최합니다.'},
+  {title:'천서제 (학교축제, 9/26~27)',date:'2026.03.10',author:'학생자치부',cat:'학교행사',content:'2026학년도 천서제를 실시합니다.'},
+  {title:'진로체험의 날 (4/25)',date:'2026.03.08',author:'진로교육부',cat:'학교행사',content:'직업 체험 및 진로 탐색 프로그램을 실시합니다.'},
+];
 
 // ===== SEARCH =====
 function siteSearchAction() {
-  const q = document.getElementById('siteSearch').value.trim();
+  const q = (document.getElementById('siteSearch').value || document.getElementById('mobileSearchInput')?.value || '').trim();
   if (!q) { showToast('검색어를 입력해주세요.'); return; }
-  showToast(`"${q}" 검색 결과 페이지로 이동합니다. (데모)`);
+  const results = [];
+  Object.entries(pageData).forEach(([name, data]) => {
+    if (name.includes(q) || data.html.replace(/<[^>]*>/g,'').includes(q)) results.push({name, cat:data.cat});
+  });
+  noticeData.forEach(n => {
+    if (n.title.includes(q) || n.content.includes(q)) results.push({name:n.title, cat:n.cat, isNotice:true});
+  });
+  const html = results.length > 0
+    ? '<h3>"'+q+'" 검색 결과 ('+results.length+'건)</h3><ul class="search-results-list">' + results.map(r => '<li onclick="closeSubpage();setTimeout(function(){'+(r.isNotice ? "openNotice('"+r.name.replace(/'/g,"\\'")+"')" : "openPage('"+r.name+"')")+'},150)"><div class="sr-category">'+r.cat+'</div><div class="sr-title">'+r.name+'</div></li>').join('') + '</ul>'
+    : '<h3>"'+q+'" 검색 결과</h3><p style="text-align:center;padding:40px 0;color:var(--text-light)">검색 결과가 없습니다.</p>';
+  document.getElementById('subpageTitle').textContent = '검색 결과';
+  document.getElementById('subpageCat').textContent = '검색';
+  document.getElementById('subpageName').textContent = q;
+  document.getElementById('subpageContent').innerHTML = html;
+  document.getElementById('subpageOverlay').classList.add('show');
+  document.getElementById('subpageOverlay').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+// ===== FONT SIZE =====
+let fontLevel = 0;
+function changeFontSize() {
+  fontLevel = (fontLevel + 1) % 3;
+  const sizes = ['14px','16px','18px'];
+  document.body.style.fontSize = sizes[fontLevel];
+  showToast('글씨 크기: ' + ['보통','크게','더 크게'][fontLevel]);
 }
 
 // ===== SCROLL TO TOP =====
@@ -2410,6 +2557,7 @@ document.addEventListener('keydown', (e) => {
     closeModal('loginModal');
     closePopup();
     closeSitemap();
+    closeSubpage();
     if (document.querySelector('.nav.open')) toggleMobileNav();
   }
 });
@@ -2473,6 +2621,14 @@ window.addEventListener('resize', () => {
   }
 });
 </script>
+
+
+<!-- SUBPAGE OVERLAY -->
+<div class="subpage-overlay" id="subpageOverlay">
+  <div class="subpage-top"><div class="container"><h2 id="subpageTitle"></h2><button class="subpage-back" onclick="closeSubpage()">← 홈으로</button></div></div>
+  <div class="subpage-breadcrumb"><div class="container"><span onclick="closeSubpage()">홈</span> &gt; <span id="subpageCat"></span> &gt; <strong id="subpageName"></strong></div></div>
+  <div class="subpage-body"><div class="container"><div class="subpage-card" id="subpageContent"></div></div></div>
+</div>
 
 </body>
   </html>
